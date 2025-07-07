@@ -1,0 +1,15 @@
+
+    <svg width="310" height="150" viewBox="0 0 310 150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="310" height="150" fill="#007AFF" rx="15"/>
+      <g transform="translate(75,75)" fill="white">
+        
+        <!-- Dumbbell -->
+        <rect x="-17.578125" y="-5.859375" width="5.859375" height="11.71875" rx="1.171875"/>
+        <rect x="-10.25390625" y="-1.171875" width="20.5078125" height="2.34375" rx="1.171875"/>
+        <rect x="11.71875" y="-5.859375" width="5.859375" height="11.71875" rx="1.171875"/>
+      
+      </g>
+      <text x="170" y="80" fill="white" font-family="Arial" font-size="24" font-weight="bold">Workout</text>
+      <text x="170" y="105" fill="white" font-family="Arial" font-size="24" font-weight="bold">Tracker</text>
+    </svg>
+  

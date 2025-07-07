@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Workout Tracker</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#007AFF">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#007AFF">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A84FF">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Workout Tracker">
+    
+    <!-- iOS Specific Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Workout Tracker">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- iOS App Icon Links -->
+    <link rel="apple-touch-icon" href="icons/icon-180.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="icons/icon-57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="icons/icon-60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icons/icon-72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="icons/icon-76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="icons/icon-114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+    
+    <!-- iOS Splash Screens -->
+    <link rel="apple-touch-startup-image" href="splash/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2732x2048.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2388x1668.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2048x1536.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1488x2266.png" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2266x1488.png" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1640x2360.png" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2360x1640.png" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1668x2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2224x1668.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1620x2160.png" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2160x1620.png" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2796x1290.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2556x1179.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1284x2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2778x1284.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2532x1170.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2436x1125.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2688x1242.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1792x828.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-2208x1242.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1334x750.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="splash/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash/splash-1136x640.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    
+    <!-- Standard PWA Links -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileColor" content="#007AFF">
+    <meta name="msapplication-TileImage" content="icons/icon-144.png">
+    <meta name="msapplication-config" content="browserconfig.xml">
+    
+    <!-- Additional iOS Meta Tags -->
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, app-argument=myScheme://path/to/content">
+    <meta name="apple-mobile-web-app-orientations" content="portrait">
+    <meta name="apple-touch-icon-precomposed" href="icons/icon-180.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/ios-theme.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- App Header -->
+        <header class="app-header">
+            <h1>Workout Tracker</h1>
+            <button class="header-menu-btn" aria-label="Menu">
+                <span class="hamburger"></span>
+            </button>
+        </header>
+
+        <!-- Bottom Tab Navigation -->
+        <nav class="tab-bar ios-tab-bar">
+            <button class="tab-button ios-tab-item active" data-tab="exercises">
+                <span class="tab-icon">🏋️</span>
+                <span class="tab-label">Exercises</span>
+            </button>
+            <button class="tab-button ios-tab-item" data-tab="workouts">
+                <span class="tab-icon">💪</span>
+                <span class="tab-label">Workouts</span>
+            </button>
+            <button class="tab-button ios-tab-item" data-tab="plans">
+                <span class="tab-icon">📋</span>
+                <span class="tab-label">Plans</span>
+            </button>
+            <button class="tab-button ios-tab-item" data-tab="profile">
+                <span class="tab-icon">📊</span>
+                <span class="tab-label">Progress</span>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Exercises Tab -->
+            <div class="tab-content active" id="exercises-tab">
+                <div class="search-container">
+                    <input type="search" class="search-input ios-input" placeholder="Search exercises..." id="exercise-search">
+                </div>
+                
+                <div class="exercise-categories">
+                    <div class="category-filter ios-segment-control">
+                        <button class="filter-btn ios-segment-item active" data-category="all">All</button>
+                        <button class="filter-btn ios-segment-item" data-category="chest">Chest</button>
+                        <button class="filter-btn ios-segment-item" data-category="back">Back</button>
+                        <button class="filter-btn ios-segment-item" data-category="legs">Legs</button>
+                        <button class="filter-btn ios-segment-item" data-category="shoulders">Shoulders</button>
+                        <button class="filter-btn ios-segment-item" data-category="arms">Arms</button>
+                    </div>
+                </div>
+                
+                <div class="exercise-list" id="exercise-list">
+                    <!-- Exercise items will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Workouts Tab -->
+            <div class="tab-content" id="workouts-tab">
+                <div class="quick-start-card ios-card">
+                    <h2>Quick Start</h2>
+                    <button class="btn ios-button" id="start-workout-btn">Start Workout</button>
+                </div>
+                
+                <div class="recent-workouts">
+                    <h3>Recent Workouts</h3>
+                    <div class="workout-list" id="recent-workouts-list">
+                        <!-- Workout items will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plans Tab -->
+            <div class="tab-content" id="plans-tab">
+                <div class="plans-header">
+                    <h2>Workout Plans</h2>
+                    <button class="btn ios-button-secondary" id="create-plan-btn">Create Plan</button>
+                </div>
+                
+                <div class="plans-list" id="plans-list">
+                    <!-- Plan items will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Profile Tab -->
+            <div class="tab-content" id="profile-tab">
+                <div class="profile-header ios-card">
+                    <div class="profile-avatar">
+                        <div class="avatar-placeholder">👤</div>
+                    </div>
+                    <h2>Your Profile</h2>
+                    <p class="profile-subtitle">Track your fitness journey</p>
+                </div>
+                
+                <div class="stats-section">
+                    <h3>Your Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card ios-card">
+                            <div class="stat-number" id="total-workouts">0</div>
+                            <div class="stat-label">Total Workouts</div>
+                        </div>
+                        <div class="stat-card ios-card">
+                            <div class="stat-number" id="total-exercises">0</div>
+                            <div class="stat-label">Exercises Done</div>
+                        </div>
+                        <div class="stat-card ios-card">
+                            <div class="stat-number" id="current-streak">0</div>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                        <div class="stat-card ios-card">
+                            <div class="stat-number" id="total-volume">0</div>
+                            <div class="stat-label">Total Volume (lbs)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-menu ios-list">
+                    <div class="ios-list-item" id="data-management-btn">
+                        <div class="ios-list-icon">💾</div>
+                        <div class="ios-list-content">
+                            <div class="ios-list-title">Data Management</div>
+                        </div>
+                        <div class="ios-list-chevron">›</div>
+                    </div>
+                    <div class="ios-list-item" id="settings-btn">
+                        <div class="ios-list-icon">⚙️</div>
+                        <div class="ios-list-content">
+                            <div class="ios-list-title">Settings</div>
+                        </div>
+                        <div class="ios-list-chevron">›</div>
+                    </div>
+                    <div class="ios-list-item" id="export-data-btn">
+                        <div class="ios-list-icon">📤</div>
+                        <div class="ios-list-content">
+                            <div class="ios-list-title">Export Data</div>
+                        </div>
+                        <div class="ios-list-chevron">›</div>
+                    </div>
+                    <div class="ios-list-item" id="about-btn">
+                        <div class="ios-list-icon">ℹ️</div>
+                        <div class="ios-list-content">
+                            <div class="ios-list-title">About</div>
+                        </div>
+                        <div class="ios-list-chevron">›</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Workout Modal -->
+    <div class="modal" id="workout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Active Workout</h2>
+                <button class="modal-close" id="close-workout-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="workout-modal-body">
+                <!-- Workout content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Management Modal -->
+    <div class="modal" id="data-management-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Data Management</h2>
+                <button class="modal-close" id="close-data-management-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="data-management-modal-body">
+                <!-- Storage Usage Section -->
+                <div class="data-section">
+                    <h3>Storage Usage</h3>
+                    <div class="storage-stats" id="storage-stats">
+                        <div class="storage-meter">
+                            <div class="storage-used" id="storage-used-bar"></div>
+                        </div>
+                        <div class="storage-details" id="storage-details">
+                            <div class="storage-text">Calculating...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Data Section -->
+                <div class="data-section">
+                    <h3>Export Data</h3>
+                    <div class="export-options">
+                        <div class="export-format-selector">
+                            <label>Export Format:</label>
+                            <select id="export-format-select" class="ios-select">
+                                <option value="json">JSON (Complete Backup)</option>
+                                <option value="csv">CSV (Spreadsheet)</option>
+                                <option value="txt">Text (Summary)</option>
+                            </select>
+                        </div>
+                        <div class="export-options-group">
+                            <label>
+                                <input type="checkbox" id="include-personal-data" checked>
+                                Include personal data (measurements, goals)
+                            </label>
+                            <label>
+                                <input type="checkbox" id="include-statistics" checked>
+                                Include statistics
+                            </label>
+                            <label>
+                                <input type="checkbox" id="compact-export">
+                                Compact format (smaller file size)
+                            </label>
+                        </div>
+                        <button class="btn ios-button" id="export-data-btn-modal">Export Data</button>
+                    </div>
+                </div>
+
+                <!-- Import Data Section -->
+                <div class="data-section">
+                    <h3>Import Data</h3>
+                    <div class="import-options">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="import-file-input" accept=".json,.csv" style="display: none;">
+                            <button class="btn ios-button-secondary" id="select-import-file">Select File</button>
+                            <div class="file-info" id="import-file-info"></div>
+                        </div>
+                        <div class="import-options-group">
+                            <label>
+                                <input type="checkbox" id="skip-duplicates" checked>
+                                Skip duplicate workouts
+                            </label>
+                            <label>
+                                <input type="checkbox" id="validate-import" checked>
+                                Validate data before import
+                            </label>
+                        </div>
+                        <button class="btn ios-button" id="import-data-btn" disabled>Import Data</button>
+                    </div>
+                </div>
+
+                <!-- Share Plans Section -->
+                <div class="data-section">
+                    <h3>Share Workout Plans</h3>
+                    <div class="share-options">
+                        <div class="plan-selector">
+                            <label>Select Plan:</label>
+                            <select id="share-plan-select" class="ios-select">
+                                <option value="">Choose a plan to share...</option>
+                            </select>
+                        </div>
+                        <div class="share-format-selector">
+                            <label>Share Format:</label>
+                            <select id="share-format-select" class="ios-select">
+                                <option value="text">Text (Easy to share)</option>
+                                <option value="json">JSON (Complete data)</option>
+                            </select>
+                        </div>
+                        <button class="btn ios-button" id="share-plan-btn" disabled>Share Plan</button>
+                    </div>
+                </div>
+
+                <!-- Data Cleanup Section -->
+                <div class="data-section">
+                    <h3>Data Cleanup</h3>
+                    <div class="cleanup-options">
+                        <div class="cleanup-option">
+                            <label>Clean old data (older than):</label>
+                            <select id="cleanup-age-select" class="ios-select">
+                                <option value="30">30 days</option>
+                                <option value="60">60 days</option>
+                                <option value="90">90 days</option>
+                                <option value="180">6 months</option>
+                                <option value="365">1 year</option>
+                            </select>
+                            <button class="btn ios-button-secondary" id="cleanup-old-data-btn">Clean Old Data</button>
+                        </div>
+                        <div class="cleanup-warning">
+                            <p><strong>⚠️ Reset All Data</strong></p>
+                            <p>This will permanently delete all your workout data. This action cannot be undone.</p>
+                            <button class="btn ios-button-destructive" id="reset-all-data-btn">Reset All Data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', function() {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', function() {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // Show update notification
+                                    showUpdateNotification();
+                                }
+                            });
+                        });
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+            
+            // Listen for service worker messages
+            navigator.serviceWorker.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'update-available') {
+                    showUpdateNotification();
+                }
+                
+                if (event.data && event.data.type === 'sync-success') {
+                    showSyncSuccessNotification(event.data.data);
+                }
+            });
+        }
+        
+        // Show update notification
+        function showUpdateNotification() {
+            // Create update notification banner
+            const banner = document.createElement('div');
+            banner.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: #007AFF;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                z-index: 10000;
+                font-size: 14px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            `;
+            banner.innerHTML = `
+                <span>New version available! </span>
+                <button onclick="updateApp()" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 10px; border-radius: 5px; margin-left: 10px; cursor: pointer;">
+                    Update Now
+                </button>
+                <button onclick="dismissUpdate()" style="background: none; border: none; color: white; padding: 5px 10px; margin-left: 10px; cursor: pointer;">
+                    ×
+                </button>
+            `;
+            document.body.appendChild(banner);
+        }
+        
+        // Update app
+        function updateApp() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(function(registration) {
+                    if (registration && registration.waiting) {
+                        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+        
+        // Dismiss update notification
+        function dismissUpdate() {
+            const banner = document.querySelector('div[style*="position: fixed"][style*="top: 0"]');
+            if (banner) {
+                banner.remove();
+            }
+        }
+        
+        // Show sync success notification
+        function showSyncSuccessNotification(data) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-size: 14px;
+                max-width: 300px;
+            `;
+            notification.innerHTML = `
+                <div style="font-weight: bold; margin-bottom: 5px;">✓ Data Synced</div>
+                <div style="font-size: 12px; opacity: 0.9;">Your workout data has been synchronized</div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Check for updates periodically
+        setInterval(function() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(function(registration) {
+                    if (registration) {
+                        registration.update();
+                    }
+                });
+            }
+        }, 60000); // Check every minute
+    </script>
+    
+    <!-- Scripts -->
+    <script src="js/database.js"></script>
+    <script src="js/exercises.js"></script>
+    <script src="js/workouts.js"></script>
+    <script src="js/plans.js"></script>
+    <script src="js/statistics.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/timers.js"></script>
+    <script src="js/timer-ui.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

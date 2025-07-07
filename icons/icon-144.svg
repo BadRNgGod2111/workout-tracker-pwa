@@ -1,0 +1,13 @@
+
+    <svg width="144" height="144" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
+      <rect width="144" height="144" fill="#007AFF" rx="14.4"/>
+      <g transform="translate(72,72)" fill="white">
+        
+        <!-- Dumbbell -->
+        <rect x="-16.875" y="-5.625" width="5.625" height="11.25" rx="1.125"/>
+        <rect x="-9.84375" y="-1.125" width="19.6875" height="2.25" rx="1.125"/>
+        <rect x="11.25" y="-5.625" width="5.625" height="11.25" rx="1.125"/>
+      
+      </g>
+    </svg>
+  

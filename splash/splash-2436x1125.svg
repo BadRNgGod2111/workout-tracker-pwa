@@ -1,0 +1,38 @@
+
+      <svg width="2436" height="1125" viewBox="0 0 2436 1125" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#007AFF;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0051D0;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        
+        <!-- Background -->
+        <rect width="2436" height="1125" fill="url(#gradient)"/>
+        
+        <!-- App Icon -->
+        <g transform="translate(1218,512.5)">
+          <circle cx="0" cy="0" r="60" fill="rgba(255,255,255,0.1)"/>
+          
+        <!-- Dumbbell -->
+        <rect x="-14.0625" y="-4.6875" width="4.6875" height="9.375" rx="0.9375"/>
+        <rect x="-8.203125" y="-0.9375" width="16.40625" height="1.875" rx="0.9375"/>
+        <rect x="9.375" y="-4.6875" width="4.6875" height="9.375" rx="0.9375"/>
+      
+        </g>
+        
+        <!-- App Name -->
+        <text x="1218" y="642.5" fill="white" font-family="SF Pro Display, -apple-system, sans-serif" font-size="28" font-weight="600" text-anchor="middle">
+          Workout Tracker
+        </text>
+        
+        <!-- Loading Indicator -->
+        <g transform="translate(1218,702.5)">
+          <circle cx="0" cy="0" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          <circle cx="0" cy="0" r="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" 
+                  stroke-dasharray="31.416" stroke-dashoffset="15.708">
+            <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" values="0;360"/>
+          </circle>
+        </g>
+      </svg>
+    

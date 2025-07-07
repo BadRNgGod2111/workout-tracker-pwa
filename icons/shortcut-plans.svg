@@ -1,0 +1,13 @@
+
+    <svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <rect width="96" height="96" fill="#AF52DE" rx="9.600000000000001"/>
+      <g transform="translate(48,48)" fill="white">
+        
+        <rect x="-1.6875" y="-1.125" width="3.375" height="2.8125" rx="0.375"/>
+        <rect x="-1.6875" y="-1.6875" width="3.375" height="0.75" rx="0.375"/>
+        <circle cx="-0.9375" cy="-1.5" r="0.1875"/>
+        <circle cx="0.9375" cy="-1.5" r="0.1875"/>
+      
+      </g>
+    </svg>
+  
