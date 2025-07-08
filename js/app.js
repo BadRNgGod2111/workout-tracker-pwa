@@ -3,6 +3,21 @@
  * Manages app initialization, navigation, state, and module integration
  */
 
+// Script loading verification
+console.log('📦 app.js loaded');
+console.log('🔍 Checking dependencies:', {
+    Database: typeof Database,
+    ExerciseManager: typeof ExerciseManager,
+    WorkoutManager: typeof WorkoutManager,
+    PlanManager: typeof PlanManager,
+    UserProfile: typeof UserProfile,
+    DataManager: typeof DataManager,
+    WorkoutTimers: typeof WorkoutTimers,
+    TimerUI: typeof TimerUI,
+    ProgressDashboard: typeof ProgressDashboard,
+    ProfileUI: typeof ProfileUI
+});
+
 class WorkoutTrackerApp {
     constructor() {
         // Application state
@@ -91,7 +106,7 @@ class WorkoutTrackerApp {
     async initializeServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
-                const registration = await navigator.serviceWorker.register('/sw.js');
+                const registration = await navigator.serviceWorker.register('./sw.js');
                 console.log('Service Worker registered successfully:', registration);
                 
                 registration.addEventListener('updatefound', () => {
@@ -1793,23 +1808,61 @@ if (document.readyState === 'loading') {
 }
 
 function initializeApp() {
-    window.app = new WorkoutTrackerApp();
+    console.log('🚀 Initializing Workout Tracker App...');
+    console.log('Available classes:', {
+        Database: typeof Database,
+        ExerciseManager: typeof ExerciseManager,
+        WorkoutManager: typeof WorkoutManager,
+        PlanManager: PlanManager,
+        UserProfile: typeof UserProfile,
+        DataManager: typeof DataManager,
+        WorkoutTimers: typeof WorkoutTimers
+    });
+    
+    try {
+        window.app = new WorkoutTrackerApp();
+        console.log('✅ App initialized successfully');
+    } catch (error) {
+        console.error('❌ Failed to initialize app:', error);
+        
+        // Show user-friendly error message
+        const errorDiv = document.createElement('div');
+        errorDiv.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ff3b30;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 10000;
+            max-width: 300px;
+        `;
+        errorDiv.innerHTML = `
+            <h3>App Loading Error</h3>
+            <p>The app failed to initialize. Please refresh the page.</p>
+            <button onclick="location.reload()" style="background: white; color: #ff3b30; border: none; padding: 10px 20px; border-radius: 4px; margin-top: 10px; cursor: pointer;">
+                Refresh Page
+            </button>
+        `;
+        document.body.appendChild(errorDiv);
+    }
     
     // Make app globally available for debugging
-    if (process?.env?.NODE_ENV === 'development') {
-        window.WorkoutTrackerApp = WorkoutTrackerApp;
-        window.Database = Database;
-        window.ExerciseManager = ExerciseManager;
-        window.WorkoutManager = WorkoutManager;
-        window.PlanManager = PlanManager;
-    }
+    window.WorkoutTrackerApp = WorkoutTrackerApp;
+    if (typeof Database !== 'undefined') window.Database = Database;
+    if (typeof ExerciseManager !== 'undefined') window.ExerciseManager = ExerciseManager;
+    if (typeof WorkoutManager !== 'undefined') window.WorkoutManager = WorkoutManager;
+    if (typeof PlanManager !== 'undefined') window.PlanManager = PlanManager;
 }
 
 // Service Worker registration with additional logic
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
         try {
-            const registration = await navigator.serviceWorker.register('/sw.js');
+            const registration = await navigator.serviceWorker.register('./sw.js');
             console.log('✅ Service Worker registered:', registration);
             
             // Handle service worker updates

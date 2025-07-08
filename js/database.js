@@ -3,6 +3,8 @@
  * Provides comprehensive data management with CRUD operations, validation, and backup functionality
  */
 
+console.log('📦 database.js loaded');
+
 class Database {
     static dbName = 'WorkoutTrackerDB';
     static version = 2; // Increased for enhanced schema

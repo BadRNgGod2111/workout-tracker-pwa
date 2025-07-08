@@ -3,6 +3,8 @@
  * Comprehensive exercise library with CRUD operations, search, filtering, and detailed exercise information
  */
 
+console.log('📦 exercises.js loaded');
+
 class ExerciseManager {
     // Exercise categories with descriptions
     static CATEGORIES = {

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Page - Workout Tracker</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .console-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .path-test {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Workout Tracker Debug Page</h1>
+    
+    <div class="debug-section">
+        <h2>JavaScript Loading Test</h2>
+        <div id="js-test-results"></div>
+        <button onclick="runJavaScriptTests()">Run JavaScript Tests</button>
+        <button onclick="testServiceWorker()">Test Service Worker</button>
+    </div>
+
+    <div class="debug-section">
+        <h2>Console Output</h2>
+        <div id="console-output" class="console-output"></div>
+        <button onclick="clearConsole()">Clear Console</button>
+    </div>
+
+    <div class="debug-section">
+        <h2>Path Tests</h2>
+        <div id="path-tests"></div>
+        <button onclick="testPaths()">Test File Paths</button>
+    </div>
+
+    <script>
+        // Capture console output
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        const consoleOutput = document.getElementById('console-output');
+        
+        function addToConsole(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const formattedMessage = `[${timestamp}] [${type.toUpperCase()}] ${message}\n`;
+            consoleOutput.textContent += formattedMessage;
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+        
+        console.log = function(...args) {
+            addToConsole(args.join(' '), 'log');
+            originalLog.apply(console, args);
+        };
+        
+        console.error = function(...args) {
+            addToConsole(args.join(' '), 'error');
+            originalError.apply(console, args);
+        };
+        
+        console.warn = function(...args) {
+            addToConsole(args.join(' '), 'warn');
+            originalWarn.apply(console, args);
+        };
+        
+        function clearConsole() {
+            consoleOutput.textContent = '';
+        }
+        
+        function createResult(message, type) {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.textContent = message;
+            return div;
+        }
+        
+        function runJavaScriptTests() {
+            const resultsContainer = document.getElementById('js-test-results');
+            resultsContainer.innerHTML = '';
+            
+            console.log('Starting JavaScript loading tests...');
+            
+            // Test 1: Check if specific global objects exist
+            const tests = [
+                { name: 'Database', obj: 'Database' },
+                { name: 'ExerciseManager', obj: 'ExerciseManager' },
+                { name: 'WorkoutManager', obj: 'WorkoutManager' },
+                { name: 'PlanManager', obj: 'PlanManager' },
+                { name: 'WorkoutTrackerApp', obj: 'WorkoutTrackerApp' },
+                { name: 'UserProfile', obj: 'UserProfile' },
+                { name: 'ProfileUI', obj: 'ProfileUI' },
+                { name: 'DataManager', obj: 'DataManager' },
+                { name: 'WorkoutTimers', obj: 'WorkoutTimers' },
+                { name: 'TimerUI', obj: 'TimerUI' },
+                { name: 'ProgressDashboard', obj: 'ProgressDashboard' },
+                { name: 'app instance', obj: 'app' }
+            ];
+            
+            tests.forEach(test => {
+                try {
+                    const exists = typeof window[test.obj] !== 'undefined';
+                    const result = exists ? 
+                        createResult(`✓ ${test.name} is available`, 'success') :
+                        createResult(`✗ ${test.name} is not available`, 'error');
+                    resultsContainer.appendChild(result);
+                    console.log(`${test.name}: ${exists ? 'Available' : 'Not Available'}`);
+                } catch (e) {
+                    const result = createResult(`✗ Error checking ${test.name}: ${e.message}`, 'error');
+                    resultsContainer.appendChild(result);
+                    console.error(`Error checking ${test.name}:`, e);
+                }
+            });
+            
+            // Test 2: Check if DOM elements exist
+            const domElements = [
+                'exercise-search',
+                'start-workout-btn',
+                'create-plan-btn',
+                'exercise-list',
+                'workout-modal',
+                'data-management-modal'
+            ];
+            
+            resultsContainer.appendChild(createResult('--- DOM Elements ---', 'warning'));
+            
+            domElements.forEach(id => {
+                const element = document.getElementById(id);
+                const result = element ? 
+                    createResult(`✓ Element #${id} exists`, 'success') :
+                    createResult(`✗ Element #${id} not found`, 'error');
+                resultsContainer.appendChild(result);
+                console.log(`Element #${id}: ${element ? 'Found' : 'Not Found'}`);
+            });
+            
+            // Test 3: Check if event listeners are attached
+            resultsContainer.appendChild(createResult('--- Event Listeners ---', 'warning'));
+            
+            const startBtn = document.getElementById('start-workout-btn');
+            if (startBtn) {
+                // Clone the element to check if it has listeners
+                const clonedBtn = startBtn.cloneNode(true);
+                const hasListeners = startBtn.toString() !== clonedBtn.toString();
+                const result = hasListeners ? 
+                    createResult(`✓ Start workout button has event listeners`, 'success') :
+                    createResult(`? Start workout button listeners unknown`, 'warning');
+                resultsContainer.appendChild(result);
+            }
+            
+            console.log('JavaScript tests completed');
+        }
+        
+        function testServiceWorker() {
+            console.log('Testing Service Worker...');
+            
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    console.log(`Found ${registrations.length} service worker registrations`);
+                    registrations.forEach((registration, index) => {
+                        console.log(`SW ${index + 1}: ${registration.scope}`);
+                    });
+                }).catch(err => {
+                    console.error('Error getting service worker registrations:', err);
+                });
+            } else {
+                console.log('Service Worker not supported');
+            }
+        }
+        
+        function testPaths() {
+            const pathContainer = document.getElementById('path-tests');
+            pathContainer.innerHTML = '';
+            
+            const filesToTest = [
+                'js/database.js',
+                'js/exercises.js',
+                'js/workouts.js',
+                'js/plans.js',
+                'js/app.js',
+                'css/app.css',
+                'css/ios-theme.css',
+                'manifest.json',
+                'sw.js'
+            ];
+            
+            console.log('Testing file paths...');
+            
+            filesToTest.forEach(filePath => {
+                const pathDiv = document.createElement('div');
+                pathDiv.className = 'path-test';
+                pathDiv.innerHTML = `
+                    <strong>${filePath}</strong>
+                    <div id="result-${filePath.replace('/', '-').replace('.', '-')}">Testing...</div>
+                `;
+                pathContainer.appendChild(pathDiv);
+                
+                // Test the path
+                fetch(filePath)
+                    .then(response => {
+                        const resultDiv = document.getElementById(`result-${filePath.replace('/', '-').replace('.', '-')}`);
+                        if (response.ok) {
+                            resultDiv.innerHTML = `✓ Status: ${response.status} - OK`;
+                            resultDiv.style.color = 'green';
+                            console.log(`${filePath}: OK (${response.status})`);
+                        } else {
+                            resultDiv.innerHTML = `✗ Status: ${response.status} - ${response.statusText}`;
+                            resultDiv.style.color = 'red';
+                            console.log(`${filePath}: Error ${response.status}`);
+                        }
+                    })
+                    .catch(error => {
+                        const resultDiv = document.getElementById(`result-${filePath.replace('/', '-').replace('.', '-')}`);
+                        resultDiv.innerHTML = `✗ Network Error: ${error.message}`;
+                        resultDiv.style.color = 'red';
+                        console.error(`${filePath}: Network Error`, error);
+                    });
+            });
+        }
+        
+        // Run initial tests
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Debug page loaded');
+            console.log('Current location:', window.location.href);
+            console.log('User agent:', navigator.userAgent);
+            
+            // Wait a bit then run tests
+            setTimeout(() => {
+                runJavaScriptTests();
+            }, 1000);
+        });
+        
+        // Global error handler
+        window.addEventListener('error', function(event) {
+            console.error('Global error:', event.error);
+        });
+        
+        // Unhandled promise rejection handler
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+        });
+    </script>
+    
+    <!-- Load the same scripts as the main page -->
+    <script src="js/database.js"></script>
+    <script src="js/exercises.js"></script>
+    <script src="js/workouts.js"></script>
+    <script src="js/plans.js"></script>
+    <script src="js/statistics.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/timers.js"></script>
+    <script src="js/timer-ui.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/user-profile.js"></script>
+    <script src="js/profile-ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

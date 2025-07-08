@@ -14,75 +14,75 @@
   "dir": "ltr",
   "icons": [
     {
-      "src": "icons/icon-72.png",
+      "src": "icons/icon-72.svg",
       "sizes": "72x72",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-96.png",
+      "src": "icons/icon-96.svg",
       "sizes": "96x96",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-128.png",
+      "src": "icons/icon-128.svg",
       "sizes": "128x128",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-144.png",
+      "src": "icons/icon-144.svg",
       "sizes": "144x144",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-152.png",
+      "src": "icons/icon-152.svg",
       "sizes": "152x152",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-180.png",
+      "src": "icons/icon-180.svg",
       "sizes": "180x180",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-192.png",
+      "src": "icons/icon-192.svg",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-256.png",
+      "src": "icons/icon-256.svg",
       "sizes": "256x256",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-384.png",
+      "src": "icons/icon-384.svg",
       "sizes": "384x384",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-512.png",
+      "src": "icons/icon-512.svg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-192-maskable.png",
+      "src": "icons/icon-192-maskable.svg",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "maskable"
     },
     {
-      "src": "icons/icon-512-maskable.png",
+      "src": "icons/icon-512-maskable.svg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "maskable"
     }
   ],
@@ -123,9 +123,9 @@
       "url": "/?action=quick-workout",
       "icons": [
         {
-          "src": "icons/shortcut-workout.png",
+          "src": "icons/shortcut-workout.svg",
           "sizes": "96x96",
-          "type": "image/png"
+          "type": "image/svg+xml"
         }
       ]
     },
@@ -136,9 +136,9 @@
       "url": "/#exercises",
       "icons": [
         {
-          "src": "icons/shortcut-exercises.png",
+          "src": "icons/shortcut-exercises.svg",
           "sizes": "96x96",
-          "type": "image/png"
+          "type": "image/svg+xml"
         }
       ]
     },
@@ -149,9 +149,9 @@
       "url": "/#plans",
       "icons": [
         {
-          "src": "icons/shortcut-plans.png",
+          "src": "icons/shortcut-plans.svg",
           "sizes": "96x96",
-          "type": "image/png"
+          "type": "image/svg+xml"
         }
       ]
     },
@@ -162,9 +162,9 @@
       "url": "/#profile",
       "icons": [
         {
-          "src": "icons/shortcut-progress.png",
+          "src": "icons/shortcut-progress.svg",
           "sizes": "96x96",
-          "type": "image/png"
+          "type": "image/svg+xml"
         }
       ]
     }
