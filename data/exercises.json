@@ -1,0 +1,245 @@
+[
+  {
+    "id": "bench-press",
+    "name": "Bench Press",
+    "category": "chest",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["pectoralis-major"],
+    "secondaryMuscles": ["triceps", "anterior-deltoids"],
+    "instructions": [
+      "Lie flat on a bench with your feet firmly planted on the ground",
+      "Grip the bar with hands slightly wider than shoulder-width",
+      "Lower the bar to your chest with control",
+      "Press the bar back up to the starting position",
+      "Keep your core engaged throughout the movement"
+    ],
+    "tips": [
+      "Keep your shoulder blades retracted",
+      "Don't bounce the bar off your chest",
+      "Maintain a slight arch in your back"
+    ]
+  },
+  {
+    "id": "push-ups",
+    "name": "Push-ups",
+    "category": "chest",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["pectoralis-major"],
+    "secondaryMuscles": ["triceps", "anterior-deltoids", "core"],
+    "instructions": [
+      "Start in a plank position with hands slightly wider than shoulders",
+      "Lower your body until your chest nearly touches the ground",
+      "Push back up to the starting position",
+      "Keep your body in a straight line throughout"
+    ],
+    "tips": [
+      "Engage your core to maintain proper form",
+      "Don't let your hips sag",
+      "Control the descent"
+    ]
+  },
+  {
+    "id": "squats",
+    "name": "Squats",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings", "calves", "core"],
+    "instructions": [
+      "Stand with feet shoulder-width apart",
+      "Lower your body by bending at the hips and knees",
+      "Go down until your thighs are parallel to the ground",
+      "Push through your heels to return to standing"
+    ],
+    "tips": [
+      "Keep your chest up and core engaged",
+      "Don't let your knees cave inward",
+      "Weight should be on your heels"
+    ]
+  },
+  {
+    "id": "deadlifts",
+    "name": "Deadlifts",
+    "category": "back",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["erector-spinae", "glutes", "hamstrings"],
+    "secondaryMuscles": ["trapezius", "rhomboids", "forearms"],
+    "instructions": [
+      "Stand with feet hip-width apart, bar over mid-foot",
+      "Bend at hips and knees to grip the bar",
+      "Keep your back straight and chest up",
+      "Lift the bar by extending your hips and knees",
+      "Stand tall with shoulders back"
+    ],
+    "tips": [
+      "Keep the bar close to your body",
+      "Drive through your heels",
+      "Don't round your back"
+    ]
+  },
+  {
+    "id": "pull-ups",
+    "name": "Pull-ups",
+    "category": "back",
+    "equipment": "pull-up bar",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["latissimus-dorsi", "rhomboids"],
+    "secondaryMuscles": ["biceps", "posterior-deltoids"],
+    "instructions": [
+      "Hang from a pull-up bar with arms fully extended",
+      "Pull your body up until your chin clears the bar",
+      "Lower yourself back down with control",
+      "Repeat for desired reps"
+    ],
+    "tips": [
+      "Engage your core throughout",
+      "Don't swing or use momentum",
+      "Focus on squeezing your shoulder blades"
+    ]
+  },
+  {
+    "id": "overhead-press",
+    "name": "Overhead Press",
+    "category": "shoulders",
+    "equipment": "barbell",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["anterior-deltoids", "lateral-deltoids"],
+    "secondaryMuscles": ["triceps", "core"],
+    "instructions": [
+      "Stand with feet shoulder-width apart",
+      "Hold the bar at shoulder height",
+      "Press the bar straight up overhead",
+      "Lower back to shoulder height with control"
+    ],
+    "tips": [
+      "Keep your core tight",
+      "Don't arch your back excessively",
+      "Press in a straight line"
+    ]
+  },
+  {
+    "id": "bicep-curls",
+    "name": "Bicep Curls",
+    "category": "arms",
+    "equipment": "dumbbells",
+    "difficulty": "beginner",
+    "primaryMuscles": ["biceps"],
+    "secondaryMuscles": ["forearms"],
+    "instructions": [
+      "Stand with dumbbells at your sides",
+      "Curl the weights up towards your shoulders",
+      "Squeeze your biceps at the top",
+      "Lower the weights back down slowly"
+    ],
+    "tips": [
+      "Keep your elbows stationary",
+      "Don't swing the weights",
+      "Control the negative portion"
+    ]
+  },
+  {
+    "id": "tricep-dips",
+    "name": "Tricep Dips",
+    "category": "arms",
+    "equipment": "bench",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["triceps"],
+    "secondaryMuscles": ["anterior-deltoids", "chest"],
+    "instructions": [
+      "Sit on a bench with hands gripping the edge",
+      "Slide off the bench, supporting your weight with your arms",
+      "Lower your body by bending your elbows",
+      "Push back up to the starting position"
+    ],
+    "tips": [
+      "Keep your body close to the bench",
+      "Don't go too low if you feel shoulder discomfort",
+      "Focus on using your triceps"
+    ]
+  },
+  {
+    "id": "planks",
+    "name": "Planks",
+    "category": "core",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["core", "transverse-abdominis"],
+    "secondaryMuscles": ["shoulders", "glutes"],
+    "instructions": [
+      "Start in a push-up position but on your forearms",
+      "Keep your body in a straight line from head to heels",
+      "Hold this position for the desired time",
+      "Breathe normally throughout"
+    ],
+    "tips": [
+      "Don't let your hips sag or pike up",
+      "Engage your core muscles",
+      "Keep your neck neutral"
+    ]
+  },
+  {
+    "id": "lunges",
+    "name": "Lunges",
+    "category": "legs",
+    "equipment": "bodyweight",
+    "difficulty": "beginner",
+    "primaryMuscles": ["quadriceps", "glutes"],
+    "secondaryMuscles": ["hamstrings", "calves"],
+    "instructions": [
+      "Step forward with one leg into a lunge position",
+      "Lower your hips until both knees are at 90 degrees",
+      "Push off your front foot to return to start",
+      "Alternate legs or complete all reps on one side"
+    ],
+    "tips": [
+      "Keep your torso upright",
+      "Don't let your front knee go past your toes",
+      "Step out far enough to maintain balance"
+    ]
+  },
+  {
+    "id": "mountain-climbers",
+    "name": "Mountain Climbers",
+    "category": "cardio",
+    "equipment": "bodyweight",
+    "difficulty": "intermediate",
+    "primaryMuscles": ["core", "hip-flexors"],
+    "secondaryMuscles": ["shoulders", "legs"],
+    "instructions": [
+      "Start in a plank position",
+      "Bring one knee towards your chest",
+      "Quickly switch legs, bringing the other knee forward",
+      "Continue alternating legs at a rapid pace"
+    ],
+    "tips": [
+      "Keep your hips level",
+      "Maintain plank position in your upper body",
+      "Land softly on your feet"
+    ]
+  },
+  {
+    "id": "burpees",
+    "name": "Burpees",
+    "category": "cardio",
+    "equipment": "bodyweight",
+    "difficulty": "advanced",
+    "primaryMuscles": ["full-body"],
+    "secondaryMuscles": ["cardiovascular"],
+    "instructions": [
+      "Start standing, then squat down and place hands on ground",
+      "Jump feet back into plank position",
+      "Do a push-up (optional)",
+      "Jump feet back to squat position",
+      "Jump up with arms overhead"
+    ],
+    "tips": [
+      "Move at your own pace",
+      "Focus on form over speed",
+      "Modify as needed"
+    ]
+  }
+]

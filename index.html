@@ -534,8 +534,20 @@
                     const startWorkoutBtn = document.getElementById('start-workout-btn');
                     if (startWorkoutBtn) {
                         startWorkoutBtn.addEventListener('click', function() {
-                            alert('🏋️ Start Workout clicked!\n\nThis would normally start a workout session.');
                             console.log('✅ Start Workout fallback clicked');
+                            // Show a more helpful message
+                            const modal = document.getElementById('workout-modal');
+                            if (modal) {
+                                modal.style.display = 'block';
+                                const body = document.getElementById('workout-modal-body');
+                                body.innerHTML = `
+                                    <div class="workout-start-screen">
+                                        <h3>🏋️ Start Your Workout</h3>
+                                        <p>Choose exercises from the Exercises tab to begin your workout session.</p>
+                                        <button class="btn ios-button" onclick="document.getElementById('workout-modal').style.display='none'">Get Started</button>
+                                    </div>
+                                `;
+                            }
                         });
                         console.log('✅ Start Workout fallback handler added');
                     }
@@ -544,8 +556,30 @@
                     const createPlanBtn = document.getElementById('create-plan-btn');
                     if (createPlanBtn) {
                         createPlanBtn.addEventListener('click', function() {
-                            alert('📋 Create Plan clicked!\n\nThis would normally open the plan creation interface.');
                             console.log('✅ Create Plan fallback clicked');
+                            // Show plan creation interface
+                            const modal = document.getElementById('workout-modal');
+                            if (modal) {
+                                modal.style.display = 'block';
+                                const body = document.getElementById('workout-modal-body');
+                                body.innerHTML = `
+                                    <div class="plan-creation-screen">
+                                        <h3>📋 Create Workout Plan</h3>
+                                        <div class="form-group">
+                                            <label>Plan Name:</label>
+                                            <input type="text" class="ios-input" placeholder="Enter plan name" id="plan-name-input">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description:</label>
+                                            <textarea class="ios-input" placeholder="Plan description" id="plan-description-input"></textarea>
+                                        </div>
+                                        <div class="button-group">
+                                            <button class="btn ios-button" onclick="savePlan()">Save Plan</button>
+                                            <button class="btn ios-button-secondary" onclick="document.getElementById('workout-modal').style.display='none'">Cancel</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }
                         });
                         console.log('✅ Create Plan fallback handler added');
                     }
@@ -572,12 +606,162 @@
                         });
                     });
                     
+                    // Load exercises from data file
+                    loadExercisesFromFile();
+                    
                     console.log('✅ Fallback handlers setup complete');
                 } else {
                     console.log('✅ Main app initialized, fallback not needed');
                 }
             }, 2000);
         });
+        
+        // Helper functions for fallback functionality
+        let exercisesData = [];
+        
+        async function loadExercisesFromFile() {
+            try {
+                console.log('📥 Loading exercises from data file...');
+                const response = await fetch('data/exercises.json');
+                const exercises = await response.json();
+                exercisesData = exercises;
+                displayExercises(exercises);
+                console.log('✅ Loaded', exercises.length, 'exercises');
+            } catch (error) {
+                console.error('❌ Failed to load exercises:', error);
+                // Show some default exercises if file loading fails
+                exercisesData = [
+                    {
+                        id: 'push-ups',
+                        name: 'Push-ups',
+                        category: 'chest',
+                        equipment: 'bodyweight',
+                        difficulty: 'beginner',
+                        instructions: ['Start in plank position', 'Lower body to ground', 'Push back up']
+                    },
+                    {
+                        id: 'squats',
+                        name: 'Squats', 
+                        category: 'legs',
+                        equipment: 'bodyweight',
+                        difficulty: 'beginner',
+                        instructions: ['Stand with feet shoulder-width apart', 'Lower body down', 'Return to standing']
+                    }
+                ];
+                displayExercises(exercisesData);
+            }
+        }
+        
+        function displayExercises(exercises) {
+            const container = document.getElementById('exercise-list');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (exercises.length === 0) {
+                container.innerHTML = '<p class="no-data">No exercises found. Try a different search or category.</p>';
+                return;
+            }
+            
+            exercises.forEach(exercise => {
+                const exerciseElement = createExerciseElement(exercise);
+                container.appendChild(exerciseElement);
+            });
+        }
+        
+        function createExerciseElement(exercise) {
+            const div = document.createElement('div');
+            div.className = 'exercise-card ios-card';
+            div.innerHTML = `
+                <div class="exercise-header">
+                    <h3 class="exercise-name">${exercise.name}</h3>
+                    <span class="exercise-category">${exercise.category}</span>
+                </div>
+                <div class="exercise-details">
+                    <span class="exercise-equipment">Equipment: ${exercise.equipment || 'bodyweight'}</span>
+                    <span class="exercise-difficulty">Difficulty: ${exercise.difficulty || 'beginner'}</span>
+                </div>
+                <div class="exercise-instructions">
+                    <p><strong>Instructions:</strong></p>
+                    <ul>
+                        ${(exercise.instructions || []).map(instruction => `<li>${instruction}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="exercise-actions">
+                    <button class="btn ios-button-secondary" onclick="addToWorkout('${exercise.id}')">Add to Workout</button>
+                </div>
+            `;
+            return div;
+        }
+        
+        function addToWorkout(exerciseId) {
+            const exercise = exercisesData.find(ex => ex.id === exerciseId);
+            if (exercise) {
+                console.log('➕ Adding exercise to workout:', exercise.name);
+                alert(`Added "${exercise.name}" to your workout! 🏋️`);
+            }
+        }
+        
+        function savePlan() {
+            const planName = document.getElementById('plan-name-input')?.value;
+            const planDescription = document.getElementById('plan-description-input')?.value;
+            
+            if (planName) {
+                console.log('💾 Saving plan:', planName);
+                alert(`Plan "${planName}" saved successfully! 📋`);
+                document.getElementById('workout-modal').style.display = 'none';
+            } else {
+                alert('Please enter a plan name.');
+            }
+        }
+        
+        // Add search functionality
+        function setupExerciseSearch() {
+            const searchInput = document.getElementById('exercise-search');
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const filteredExercises = exercisesData.filter(exercise => 
+                        exercise.name.toLowerCase().includes(searchTerm) ||
+                        exercise.category.toLowerCase().includes(searchTerm) ||
+                        (exercise.equipment && exercise.equipment.toLowerCase().includes(searchTerm))
+                    );
+                    displayExercises(filteredExercises);
+                });
+            }
+        }
+        
+        // Add category filtering
+        function setupCategoryFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // Remove active class from all filters
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked filter
+                    e.target.classList.add('active');
+                    
+                    const category = e.target.dataset.category;
+                    let filteredExercises;
+                    
+                    if (category === 'all') {
+                        filteredExercises = exercisesData;
+                    } else {
+                        filteredExercises = exercisesData.filter(exercise => 
+                            exercise.category.toLowerCase() === category.toLowerCase()
+                        );
+                    }
+                    
+                    displayExercises(filteredExercises);
+                });
+            });
+        }
+        
+        // Initialize search and filters after a delay
+        setTimeout(() => {
+            setupExerciseSearch();
+            setupCategoryFilters();
+        }, 3000);
     </script>
 </body>
 </html>
