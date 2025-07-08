@@ -517,5 +517,67 @@
     <script src="js/user-profile.js"></script>
     <script src="js/profile-ui.js"></script>
     <script src="js/app.js"></script>
+    
+    <!-- Fallback button functionality -->
+    <script>
+        // Basic fallback functionality if app doesn't initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 Setting up fallback button functionality...');
+            
+            // Wait a bit for the main app to load
+            setTimeout(function() {
+                // Check if main app initialized
+                if (!window.app) {
+                    console.warn('⚠️ Main app not initialized, setting up fallback handlers');
+                    
+                    // Basic Start Workout button
+                    const startWorkoutBtn = document.getElementById('start-workout-btn');
+                    if (startWorkoutBtn) {
+                        startWorkoutBtn.addEventListener('click', function() {
+                            alert('🏋️ Start Workout clicked!\n\nThis would normally start a workout session.');
+                            console.log('✅ Start Workout fallback clicked');
+                        });
+                        console.log('✅ Start Workout fallback handler added');
+                    }
+                    
+                    // Basic Create Plan button
+                    const createPlanBtn = document.getElementById('create-plan-btn');
+                    if (createPlanBtn) {
+                        createPlanBtn.addEventListener('click', function() {
+                            alert('📋 Create Plan clicked!\n\nThis would normally open the plan creation interface.');
+                            console.log('✅ Create Plan fallback clicked');
+                        });
+                        console.log('✅ Create Plan fallback handler added');
+                    }
+                    
+                    // Basic tab navigation
+                    const tabButtons = document.querySelectorAll('.tab-button');
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    
+                    tabButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const targetTab = this.dataset.tab;
+                            console.log('✅ Tab clicked:', targetTab);
+                            
+                            // Remove active class from all tabs and contents
+                            tabButtons.forEach(btn => btn.classList.remove('active'));
+                            tabContents.forEach(content => content.classList.remove('active'));
+                            
+                            // Add active class to clicked tab and corresponding content
+                            this.classList.add('active');
+                            const targetContent = document.getElementById(targetTab + '-tab');
+                            if (targetContent) {
+                                targetContent.classList.add('active');
+                            }
+                        });
+                    });
+                    
+                    console.log('✅ Fallback handlers setup complete');
+                } else {
+                    console.log('✅ Main app initialized, fallback not needed');
+                }
+            }, 2000);
+        });
+    </script>
 </body>
 </html>

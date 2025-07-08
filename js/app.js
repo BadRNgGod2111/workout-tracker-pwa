@@ -1809,21 +1809,52 @@ if (document.readyState === 'loading') {
 
 function initializeApp() {
     console.log('🚀 Initializing Workout Tracker App...');
-    console.log('Available classes:', {
+    console.log('🔍 Document ready state:', document.readyState);
+    console.log('🔍 Current URL:', window.location.href);
+    
+    console.log('📦 Available classes:', {
         Database: typeof Database,
         ExerciseManager: typeof ExerciseManager,
         WorkoutManager: typeof WorkoutManager,
-        PlanManager: PlanManager,
+        PlanManager: typeof PlanManager,
         UserProfile: typeof UserProfile,
         DataManager: typeof DataManager,
-        WorkoutTimers: typeof WorkoutTimers
+        WorkoutTimers: typeof WorkoutTimers,
+        TimerUI: typeof TimerUI,
+        ProgressDashboard: typeof ProgressDashboard,
+        ProfileUI: typeof ProfileUI
     });
+    
+    // Check if required DOM elements exist
+    const requiredElements = [
+        'start-workout-btn',
+        'create-plan-btn',
+        'exercise-search',
+        'exercises-tab',
+        'workouts-tab',
+        'plans-tab',
+        'profile-tab'
+    ];
+    
+    const missingElements = requiredElements.filter(id => !document.getElementById(id));
+    if (missingElements.length > 0) {
+        console.warn('⚠️ Missing DOM elements:', missingElements);
+    }
     
     try {
         window.app = new WorkoutTrackerApp();
         console.log('✅ App initialized successfully');
+        
+        // Verify app is working
+        if (window.app && typeof window.app.init === 'function') {
+            console.log('✅ App methods available');
+        } else {
+            console.error('❌ App methods not available');
+        }
+        
     } catch (error) {
         console.error('❌ Failed to initialize app:', error);
+        console.error('❌ Error stack:', error.stack);
         
         // Show user-friendly error message
         const errorDiv = document.createElement('div');

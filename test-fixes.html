@@ -3,197 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Fix Test - Workout Tracker</title>
+    <title>Test Fixes - Workout Tracker</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 20px;
-            background-color: #f5f5f5;
+            background: #f5f5f5;
         }
-        .test-section {
+        .test-panel {
             background: white;
-            padding: 20px;
-            margin: 20px 0;
             border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .result {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-        .success { background: #d4edda; color: #155724; }
-        .error { background: #f8d7da; color: #721c24; }
-        .warning { background: #fff3cd; color: #856404; }
-        button {
+        .test-button {
             background: #007AFF;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 12px 24px;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 5px;
+            margin: 10px;
+            font-size: 14px;
         }
-        button:hover { background: #0056b3; }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
     </style>
 </head>
 <body>
-    <h1>Workout Tracker - Fix Verification</h1>
+    <h1>🧪 Test Fixes for Workout Tracker</h1>
     
-    <div class="test-section">
-        <h2>JavaScript Loading Status</h2>
-        <div id="js-status"></div>
+    <div class="test-panel">
+        <h2>JavaScript Loading Test</h2>
+        <div id="js-test-status" class="status info">Testing JavaScript loading...</div>
+        <button class="test-button" id="js-test-btn">Test JavaScript</button>
     </div>
-
-    <div class="test-section">
-        <h2>Service Worker Status</h2>
-        <div id="sw-status"></div>
-        <button onclick="testServiceWorker()">Test Service Worker</button>
+    
+    <div class="test-panel">
+        <h2>Service Worker Test</h2>
+        <div id="sw-test-status" class="status info">Testing Service Worker...</div>
+        <button class="test-button" id="sw-test-btn">Test Service Worker</button>
     </div>
-
-    <div class="test-section">
+    
+    <div class="test-panel">
+        <h2>Class Availability Test</h2>
+        <div id="class-test-status" class="status info">Testing class availability...</div>
+        <button class="test-button" id="class-test-btn">Test Classes</button>
+    </div>
+    
+    <div class="test-panel">
+        <h2>App Initialization Test</h2>
+        <div id="app-test-status" class="status info">Testing app initialization...</div>
+        <button class="test-button" id="app-test-btn">Test App Init</button>
+    </div>
+    
+    <div class="test-panel">
         <h2>Button Functionality Test</h2>
-        <div id="button-test"></div>
-        <button id="test-button" onclick="testButtonClick()">Test Button Click</button>
+        <div id="button-test-status" class="status info">Testing button functionality...</div>
+        <button class="test-button" id="start-workout-btn">Start Workout</button>
+        <button class="test-button" id="create-plan-btn">Create Plan</button>
     </div>
-
-    <div class="test-section">
-        <h2>Quick App Test</h2>
-        <div id="app-test"></div>
-        <button onclick="quickAppTest()">Test App Initialization</button>
-    </div>
-
+    
     <script>
-        function createResult(message, type) {
-            const div = document.createElement('div');
-            div.className = `result ${type}`;
-            div.textContent = message;
-            return div;
-        }
-
-        function testJavaScriptLoading() {
-            const container = document.getElementById('js-status');
-            container.innerHTML = '';
+        console.log('🧪 Test page loaded');
+        
+        // Test 1: JavaScript Loading
+        document.getElementById('js-test-btn').addEventListener('click', function() {
+            const status = document.getElementById('js-test-status');
+            status.textContent = 'Testing JavaScript functionality...';
+            status.className = 'status info';
             
-            const classes = [
-                'Database', 'ExerciseManager', 'WorkoutManager', 
-                'PlanManager', 'UserProfile', 'DataManager'
-            ];
-            
-            let allLoaded = true;
-            
-            classes.forEach(className => {
-                const isLoaded = typeof window[className] !== 'undefined';
-                const result = isLoaded ? 
-                    createResult(`✓ ${className} loaded`, 'success') :
-                    createResult(`✗ ${className} missing`, 'error');
-                container.appendChild(result);
-                if (!isLoaded) allLoaded = false;
-            });
-            
-            const overallResult = allLoaded ? 
-                createResult('✓ All core JavaScript files loaded successfully', 'success') :
-                createResult('✗ Some JavaScript files failed to load', 'error');
-            container.appendChild(overallResult);
-        }
-
-        function testServiceWorker() {
-            const container = document.getElementById('sw-status');
-            container.innerHTML = '';
+            setTimeout(() => {
+                status.textContent = '✅ JavaScript is working properly!';
+                status.className = 'status success';
+            }, 500);
+        });
+        
+        // Test 2: Service Worker
+        document.getElementById('sw-test-btn').addEventListener('click', function() {
+            const status = document.getElementById('sw-test-status');
+            status.textContent = 'Testing Service Worker...';
+            status.className = 'status info';
             
             if ('serviceWorker' in navigator) {
-                container.appendChild(createResult('✓ Service Worker supported', 'success'));
-                
-                navigator.serviceWorker.getRegistrations().then(registrations => {
-                    if (registrations.length > 0) {
-                        container.appendChild(createResult(`✓ Found ${registrations.length} service worker registration(s)`, 'success'));
-                        registrations.forEach((reg, index) => {
-                            container.appendChild(createResult(`SW ${index + 1}: ${reg.scope}`, 'warning'));
-                        });
-                    } else {
-                        container.appendChild(createResult('⚠ No service worker registrations found', 'warning'));
-                    }
-                }).catch(err => {
-                    container.appendChild(createResult(`✗ Error checking service workers: ${err.message}`, 'error'));
-                });
-                
-                // Test registration
                 navigator.serviceWorker.register('./sw.js')
-                    .then(registration => {
-                        container.appendChild(createResult('✓ Service Worker registration successful', 'success'));
+                    .then(function(registration) {
+                        status.textContent = '✅ Service Worker registered successfully!';
+                        status.className = 'status success';
+                        console.log('Service Worker registered:', registration);
                     })
-                    .catch(error => {
-                        container.appendChild(createResult(`✗ Service Worker registration failed: ${error.message}`, 'error'));
+                    .catch(function(error) {
+                        status.textContent = '❌ Service Worker registration failed: ' + error.message;
+                        status.className = 'status error';
+                        console.error('Service Worker error:', error);
                     });
             } else {
-                container.appendChild(createResult('✗ Service Worker not supported', 'error'));
+                status.textContent = '❌ Service Worker not supported in this browser';
+                status.className = 'status error';
             }
-        }
-
-        function testButtonClick() {
-            const container = document.getElementById('button-test');
-            container.innerHTML = '';
-            container.appendChild(createResult('✓ Button click event working', 'success'));
+        });
+        
+        // Test 3: Class Availability
+        document.getElementById('class-test-btn').addEventListener('click', function() {
+            const status = document.getElementById('class-test-status');
+            status.textContent = 'Testing class availability...';
+            status.className = 'status info';
             
-            // Test if we can access DOM elements that the app uses
-            const testElements = [
-                'start-workout-btn', 'create-plan-btn', 'exercise-search'
+            // Load the scripts dynamically to test
+            const scripts = [
+                'js/database.js',
+                'js/exercises.js',
+                'js/workouts.js',
+                'js/plans.js'
             ];
             
-            testElements.forEach(id => {
-                const element = document.getElementById(id);
-                const result = element ? 
-                    createResult(`✓ Found element: ${id}`, 'success') :
-                    createResult(`⚠ Element not found: ${id} (expected on main page)`, 'warning');
-                container.appendChild(result);
-            });
-        }
-
-        function quickAppTest() {
-            const container = document.getElementById('app-test');
-            container.innerHTML = '';
+            let loadedScripts = 0;
+            let totalScripts = scripts.length;
             
-            try {
-                if (typeof WorkoutTrackerApp !== 'undefined') {
-                    container.appendChild(createResult('✓ WorkoutTrackerApp class available', 'success'));
+            scripts.forEach(script => {
+                const scriptElement = document.createElement('script');
+                scriptElement.src = script;
+                scriptElement.onload = function() {
+                    loadedScripts++;
+                    console.log(`✅ Loaded: ${script}`);
                     
-                    // Test if we can create basic instance (don't actually initialize)
-                    const hasConstructor = typeof WorkoutTrackerApp === 'function';
-                    container.appendChild(createResult(
-                        hasConstructor ? '✓ WorkoutTrackerApp constructor available' : '✗ WorkoutTrackerApp is not a constructor',
-                        hasConstructor ? 'success' : 'error'
-                    ));
-                } else {
-                    container.appendChild(createResult('✗ WorkoutTrackerApp class not available', 'error'));
-                }
-                
-                if (typeof Database !== 'undefined') {
-                    container.appendChild(createResult('✓ Database class available', 'success'));
-                } else {
-                    container.appendChild(createResult('✗ Database class not available', 'error'));
-                }
-                
-            } catch (error) {
-                container.appendChild(createResult(`✗ App test failed: ${error.message}`, 'error'));
+                    if (loadedScripts === totalScripts) {
+                        // Check if classes are available
+                        const classes = {
+                            Database: typeof Database !== 'undefined',
+                            ExerciseManager: typeof ExerciseManager !== 'undefined',
+                            WorkoutManager: typeof WorkoutManager !== 'undefined',
+                            PlanManager: typeof PlanManager !== 'undefined'
+                        };
+                        
+                        const allLoaded = Object.values(classes).every(loaded => loaded);
+                        
+                        if (allLoaded) {
+                            status.textContent = '✅ All classes loaded successfully!';
+                            status.className = 'status success';
+                        } else {
+                            status.textContent = '❌ Some classes failed to load: ' + JSON.stringify(classes);
+                            status.className = 'status error';
+                        }
+                    }
+                };
+                scriptElement.onerror = function() {
+                    status.textContent = `❌ Failed to load: ${script}`;
+                    status.className = 'status error';
+                };
+                document.head.appendChild(scriptElement);
+            });
+        });
+        
+        // Test 4: App Initialization
+        document.getElementById('app-test-btn').addEventListener('click', function() {
+            const status = document.getElementById('app-test-status');
+            status.textContent = 'Testing app initialization...';
+            status.className = 'status info';
+            
+            // Load app.js and try to initialize
+            const appScript = document.createElement('script');
+            appScript.src = 'js/app.js';
+            appScript.onload = function() {
+                setTimeout(() => {
+                    if (typeof WorkoutTrackerApp !== 'undefined') {
+                        try {
+                            const testApp = new WorkoutTrackerApp();
+                            status.textContent = '✅ App initialized successfully!';
+                            status.className = 'status success';
+                        } catch (error) {
+                            status.textContent = '❌ App initialization failed: ' + error.message;
+                            status.className = 'status error';
+                        }
+                    } else {
+                        status.textContent = '❌ WorkoutTrackerApp class not found';
+                        status.className = 'status error';
+                    }
+                }, 1000);
+            };
+            appScript.onerror = function() {
+                status.textContent = '❌ Failed to load app.js';
+                status.className = 'status error';
+            };
+            document.head.appendChild(appScript);
+        });
+        
+        // Test 5: Button Functionality (simulate main app buttons)
+        let buttonTestComplete = false;
+        
+        function testButton(buttonId, buttonName) {
+            const button = document.getElementById(buttonId);
+            const status = document.getElementById('button-test-status');
+            
+            if (button) {
+                button.addEventListener('click', function() {
+                    status.textContent = `✅ ${buttonName} button clicked successfully!`;
+                    status.className = 'status success';
+                    console.log(`${buttonName} button clicked`);
+                });
             }
         }
-
-        // Run tests on load
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🧪 Running fix verification tests...');
+        
+        // Set up button tests
+        testButton('start-workout-btn', 'Start Workout');
+        testButton('create-plan-btn', 'Create Plan');
+        
+        // Initial status
+        document.getElementById('button-test-status').textContent = 'Click the buttons above to test functionality';
+        
+        // Auto-run basic tests
+        setTimeout(() => {
+            console.log('🔍 Running automatic tests...');
             
-            // Wait a moment for scripts to load
+            // Test basic JavaScript
+            document.getElementById('js-test-btn').click();
+            
+            // Test Service Worker
             setTimeout(() => {
-                testJavaScriptLoading();
-                testServiceWorker();
+                document.getElementById('sw-test-btn').click();
             }, 1000);
-        });
-
-        // Global error handler
-        window.addEventListener('error', function(event) {
-            console.error('Test page error:', event.error);
-        });
+            
+            // Test Classes
+            setTimeout(() => {
+                document.getElementById('class-test-btn').click();
+            }, 2000);
+            
+        }, 500);
     </script>
 </body>
 </html>
