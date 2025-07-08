@@ -107,7 +107,7 @@ class WorkoutTrackerApp {
     async initializeServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
-                const registration = await navigator.serviceWorker.register('./sw.js');
+                const registration = await navigator.serviceWorker.register('/sw.js');
                 console.log('Service Worker registered successfully:', registration);
                 
                 registration.addEventListener('updatefound', () => {
@@ -1973,7 +1973,7 @@ function initializeAppSafely() {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', async () => {
         try {
-            const registration = await navigator.serviceWorker.register('./sw.js');
+            const registration = await navigator.serviceWorker.register('/sw.js');
             console.log('✅ Service Worker registered:', registration);
             
             // Handle service worker updates

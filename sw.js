@@ -3,44 +3,44 @@
  * Provides offline functionality, caching strategies, and background sync
  */
 
-const CACHE_NAME = 'workout-tracker-v2';
+const CACHE_NAME = 'workout-tracker-v3';
 const DATA_CACHE_NAME = 'workout-tracker-data-v1';
 const SYNC_CACHE_NAME = 'workout-tracker-sync-v1';
 
 // App Shell - Core files that rarely change
 const APP_SHELL_FILES = [
-  './',
-  './index.html',
-  './css/app.css',
-  './css/ios-theme.css',
-  './css/user-profile.css',
-  './js/app.js',
-  './js/database.js',
-  './js/exercises.js',
-  './js/workouts.js',
-  './js/plans.js',
-  './js/statistics.js',
-  './js/charts.js',
-  './js/progress.js',
-  './js/timers.js',
-  './js/timer-ui.js',
-  './js/notifications.js',
-  './js/data-manager.js',
-  './js/user-profile.js',
-  './js/profile-ui.js',
-  './manifest.json',
-  './icons/icon-192.svg',
-  './icons/icon-512.svg',
-  './icons/icon-maskable.svg',
-  './offline.html'
+  '/',
+  '/index.html',
+  '/css/app.css',
+  '/css/ios-theme.css',
+  '/css/user-profile.css',
+  '/js/app.js',
+  '/js/database.js',
+  '/js/exercises.js',
+  '/js/workouts.js',
+  '/js/plans.js',
+  '/js/statistics.js',
+  '/js/charts.js',
+  '/js/progress.js',
+  '/js/timers.js',
+  '/js/timer-ui.js',
+  '/js/notifications.js',
+  '/js/data-manager.js',
+  '/js/user-profile.js',
+  '/js/profile-ui.js',
+  '/data/exercises.json',
+  '/manifest.json',
+  '/favicon.svg',
+  '/icons/icon-192.svg',
+  '/icons/icon-512.svg',
+  '/debug.html',
+  '/test-fixes.html',
+  '/offline.html'
 ];
 
-// Dynamic content that changes frequently
-const DYNAMIC_CACHE_URLS = [
-  '/api/exercises',
-  '/api/workouts',
-  '/api/plans',
-  '/api/progress'
+// Static data files that should be cached
+const STATIC_DATA_FILES = [
+  '/data/exercises.json'
 ];
 
 // Install event - Cache app shell
@@ -100,25 +100,27 @@ self.addEventListener('fetch', event => {
 
   // Handle different types of requests with appropriate strategies
   if (request.method === 'GET') {
-    // App Shell - Cache First
-    if (APP_SHELL_FILES.includes(url.pathname)) {
+    // App Shell files - Cache First
+    if (APP_SHELL_FILES.includes(url.pathname) || url.pathname === '/') {
       event.respondWith(cacheFirst(request));
     }
-    // Images - Cache First with fallback
-    else if (request.destination === 'image') {
+    // Static data files - Cache First
+    else if (STATIC_DATA_FILES.includes(url.pathname)) {
+      event.respondWith(cacheFirst(request));
+    }
+    // Images and icons - Cache First with fallback
+    else if (request.destination === 'image' || url.pathname.startsWith('/icons/')) {
       event.respondWith(cacheFirstWithFallback(request));
     }
-    // API calls - Network First with cache fallback
-    else if (url.pathname.startsWith('/api/')) {
-      event.respondWith(networkFirstWithCache(request));
-    }
-    // Static assets - Stale While Revalidate
-    else if (url.pathname.startsWith('/css/') || 
-             url.pathname.startsWith('/js/') ||
-             url.pathname.startsWith('/icons/')) {
+    // CSS and JS files - Stale While Revalidate
+    else if (url.pathname.startsWith('/css/') || url.pathname.startsWith('/js/')) {
       event.respondWith(staleWhileRevalidate(request));
     }
-    // Default - Network First
+    // Other files from our domain - Cache First
+    else if (url.origin === self.location.origin) {
+      event.respondWith(cacheFirst(request));
+    }
+    // External resources - Network First
     else {
       event.respondWith(networkFirst(request));
     }
@@ -134,16 +136,42 @@ async function cacheFirst(request) {
   try {
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
+      console.log('[SW] Cache hit for:', request.url);
       return cachedResponse;
     }
     
+    console.log('[SW] Cache miss, fetching:', request.url);
     const networkResponse = await fetch(request);
-    const cache = await caches.open(CACHE_NAME);
-    cache.put(request, networkResponse.clone());
+    
+    if (networkResponse.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
+      console.log('[SW] Cached new resource:', request.url);
+    }
+    
     return networkResponse;
   } catch (error) {
-    console.error('[SW] Cache first failed:', error);
-    return await caches.match('/offline.html');
+    console.error('[SW] Cache first failed for:', request.url, error);
+    
+    // If it's the main page, serve the offline page
+    if (request.url.includes('index.html') || request.url.endsWith('/')) {
+      const offlineResponse = await caches.match('/offline.html');
+      if (offlineResponse) {
+        return offlineResponse;
+      }
+    }
+    
+    // Try to return any cached version
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    
+    // Last resort - return a basic response
+    return new Response('Offline - resource not available', { 
+      status: 503, 
+      statusText: 'Service Unavailable' 
+    });
   }
 }
 
