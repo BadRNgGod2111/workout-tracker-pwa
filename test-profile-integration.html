@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile System Test</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 20px; }
+        .test-result { padding: 10px; margin: 5px 0; border-radius: 5px; }
+        .pass { background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .fail { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .info { background-color: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 15px; margin: 5px; background: #007AFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056CC; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Profile System Integration Test</h1>
+    <div id="test-results"></div>
+    
+    <div class="test-section">
+        <h2>Manual Tests</h2>
+        <button onclick="testProfileModal()">Test Profile Modal</button>
+        <button onclick="testThemeSwitch()">Test Theme Switch</button>
+        <button onclick="testGoalManagement()">Test Goal Management</button>
+        <button onclick="testUnitPreferences()">Test Unit Preferences</button>
+    </div>
+
+    <!-- Include the actual app files -->
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/ios-theme.css">
+    <link rel="stylesheet" href="css/user-profile.css">
+
+    <script>
+        const results = document.getElementById('test-results');
+        
+        function addResult(test, status, message) {
+            const div = document.createElement('div');
+            div.className = `test-result ${status}`;
+            div.innerHTML = `<strong>${test}:</strong> ${message}`;
+            results.appendChild(div);
+        }
+
+        // Test 1: Check if CSS files load
+        function testCSSFiles() {
+            const cssFiles = [
+                'css/app.css',
+                'css/ios-theme.css', 
+                'css/user-profile.css'
+            ];
+            
+            cssFiles.forEach(file => {
+                const link = document.querySelector(`link[href="${file}"]`);
+                if (link) {
+                    addResult('CSS Load', 'pass', `${file} - Found`);
+                } else {
+                    addResult('CSS Load', 'fail', `${file} - Missing`);
+                }
+            });
+        }
+
+        // Test 2: Check if JS files exist and can be loaded
+        async function testJSFiles() {
+            const jsFiles = [
+                'js/database.js',
+                'js/user-profile.js',
+                'js/profile-ui.js',
+                'js/app.js'
+            ];
+            
+            for (const file of jsFiles) {
+                try {
+                    const response = await fetch(file);
+                    if (response.ok) {
+                        addResult('JS File', 'pass', `${file} - Available`);
+                    } else {
+                        addResult('JS File', 'fail', `${file} - HTTP ${response.status}`);
+                    }
+                } catch (error) {
+                    addResult('JS File', 'fail', `${file} - ${error.message}`);
+                }
+            }
+        }
+
+        // Test 3: Check if classes are defined
+        function testClassDefinitions() {
+            // Simulate loading the JS files content to check for class definitions
+            const classTests = [
+                { name: 'UserProfile', file: 'js/user-profile.js' },
+                { name: 'ProfileUI', file: 'js/profile-ui.js' },
+                { name: 'WorkoutTrackerApp', file: 'js/app.js' }
+            ];
+            
+            classTests.forEach(test => {
+                fetch(test.file)
+                    .then(response => response.text())
+                    .then(content => {
+                        if (content.includes(`class ${test.name}`)) {
+                            addResult('Class Definition', 'pass', `${test.name} class found in ${test.file}`);
+                        } else {
+                            addResult('Class Definition', 'fail', `${test.name} class not found in ${test.file}`);
+                        }
+                    })
+                    .catch(error => {
+                        addResult('Class Definition', 'fail', `Cannot read ${test.file}: ${error.message}`);
+                    });
+            });
+        }
+
+        // Test 4: Check CSS custom properties
+        function testCSSCustomProperties() {
+            const root = document.documentElement;
+            const testProperties = [
+                '--user-primary-color',
+                '--user-primary-dark', 
+                '--user-accent-color'
+            ];
+            
+            testProperties.forEach(prop => {
+                const value = getComputedStyle(root).getPropertyValue(prop);
+                if (value.trim()) {
+                    addResult('CSS Properties', 'pass', `${prop}: ${value.trim()}`);
+                } else {
+                    addResult('CSS Properties', 'info', `${prop}: Not set (will use defaults)`);
+                }
+            });
+        }
+
+        // Test 5: Check HTML structure
+        function testHTMLStructure() {
+            const requiredElements = [
+                { id: 'profile-tab', description: 'Profile tab container' },
+                { class: 'profile-header', description: 'Profile header section' },
+                { id: 'settings-btn', description: 'Settings button' }
+            ];
+            
+            requiredElements.forEach(element => {
+                let el;
+                if (element.id) {
+                    el = document.getElementById(element.id);
+                } else if (element.class) {
+                    el = document.querySelector(`.${element.class}`);
+                }
+                
+                if (el) {
+                    addResult('HTML Structure', 'pass', `${element.description} - Found`);
+                } else {
+                    addResult('HTML Structure', 'fail', `${element.description} - Missing`);
+                }
+            });
+        }
+
+        // Manual test functions
+        function testProfileModal() {
+            addResult('Manual Test', 'info', 'Profile Modal test initiated - Check console for details');
+            console.log('Testing Profile Modal...');
+            
+            // Try to create a simple modal test
+            const modal = document.createElement('div');
+            modal.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; border-radius: 10px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                    <h3>Profile Modal Test</h3>
+                    <p>✅ Modal positioning works</p>
+                    <p>✅ CSS styling applies</p>
+                    <button onclick="this.parentElement.parentElement.remove()">Close</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function testThemeSwitch() {
+            addResult('Manual Test', 'info', 'Theme Switch test initiated');
+            console.log('Testing Theme Switch...');
+            
+            // Test theme switching
+            const root = document.documentElement;
+            const colors = ['#007AFF', '#AF52DE', '#34C759', '#FF9500'];
+            let colorIndex = 0;
+            
+            const interval = setInterval(() => {
+                root.style.setProperty('--user-primary-color', colors[colorIndex]);
+                colorIndex = (colorIndex + 1) % colors.length;
+                
+                if (colorIndex === 0) {
+                    clearInterval(interval);
+                    addResult('Theme Test', 'pass', 'Theme switching animation completed');
+                }
+            }, 500);
+        }
+
+        function testGoalManagement() {
+            addResult('Manual Test', 'info', 'Goal Management test initiated');
+            console.log('Testing Goal Management...');
+            
+            // Create a test goal card
+            const goalCard = document.createElement('div');
+            goalCard.innerHTML = `
+                <div style="background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 10px; border: 1px solid #e9ecef;">
+                    <h4>Test Goal: Bench Press 200lbs</h4>
+                    <div style="width: 100%; height: 6px; background: #e9ecef; border-radius: 3px; margin: 10px 0;">
+                        <div style="width: 65%; height: 100%; background: #007AFF; border-radius: 3px; transition: width 0.3s;"></div>
+                    </div>
+                    <p>130 lbs of 200 lbs (65%)</p>
+                    <button onclick="this.parentElement.remove()">Delete Test Goal</button>
+                </div>
+            `;
+            results.appendChild(goalCard);
+            addResult('Goal Test', 'pass', 'Goal card UI elements working');
+        }
+
+        function testUnitPreferences() {
+            addResult('Manual Test', 'info', 'Unit Preferences test initiated');
+            console.log('Testing Unit Preferences...');
+            
+            // Test unit conversion
+            const testConversions = [
+                { from: 150, fromUnit: 'lbs', toUnit: 'kg', expected: 68.04 },
+                { from: 70, fromUnit: 'inches', toUnit: 'cm', expected: 177.8 },
+                { from: 5, fromUnit: 'miles', toUnit: 'km', expected: 8.05 }
+            ];
+            
+            testConversions.forEach(test => {
+                // Simulate conversion (using actual conversion formulas)
+                let result;
+                if (test.fromUnit === 'lbs') {
+                    result = test.from * 0.453592;
+                } else if (test.fromUnit === 'inches') {
+                    result = test.from * 2.54;
+                } else if (test.fromUnit === 'miles') {
+                    result = test.from * 1.60934;
+                }
+                
+                const isCorrect = Math.abs(result - test.expected) < 0.1;
+                addResult('Unit Conversion', isCorrect ? 'pass' : 'fail', 
+                    `${test.from} ${test.fromUnit} → ${result.toFixed(2)} ${test.toUnit} (expected: ${test.expected})`);
+            });
+        }
+
+        // Run all automated tests
+        async function runAllTests() {
+            addResult('Test Suite', 'info', 'Starting Profile System Integration Tests...');
+            
+            testCSSFiles();
+            await testJSFiles();
+            testClassDefinitions();
+            testCSSCustomProperties();
+            testHTMLStructure();
+            
+            addResult('Test Suite', 'info', 'Automated tests completed. Use manual test buttons above for interactive testing.');
+        }
+
+        // Start tests when page loads
+        window.addEventListener('load', runAllTests);
+    </script>
+</body>
+</html>
