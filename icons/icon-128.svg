@@ -1,13 +1,8 @@
-
-    <svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-      <rect width="128" height="128" fill="#007AFF" rx="12.8"/>
-      <g transform="translate(64,64)" fill="white">
-        
-        <!-- Dumbbell -->
-        <rect x="-15" y="-5" width="5" height="10" rx="1"/>
-        <rect x="-8.75" y="-1" width="17.5" height="2" rx="1"/>
-        <rect x="10" y="-5" width="5" height="10" rx="1"/>
-      
-      </g>
-    </svg>
-  
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" rx="42" fill="#007AFF"/>
+  <path d="M48 96h24v-16h48v16h24v-32h-24v-16h-48v16h-24v32z" fill="white"/>
+  <circle cx="48" cy="96" r="12" fill="white"/>
+  <circle cx="144" cy="96" r="12" fill="white"/>
+  <path d="M72 64h48v64h-48z" fill="white" opacity="0.8"/>
+</svg>
+EOF < /dev/null

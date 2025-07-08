@@ -20,7 +20,7 @@
   --ios-gray-5: #E5E5EA;
   --ios-gray-6: #F2F2F7;
   
-  /* iOS System Colors */
+  /* Light Mode Colors */
   --ios-label: #000000;
   --ios-secondary-label: rgba(60, 60, 67, 0.6);
   --ios-tertiary-label: rgba(60, 60, 67, 0.3);
@@ -39,6 +39,152 @@
   --ios-secondary-system-fill: rgba(120, 120, 128, 0.16);
   --ios-tertiary-system-fill: rgba(118, 118, 128, 0.12);
   --ios-quaternary-system-fill: rgba(116, 116, 128, 0.08);
+}
+
+/* Dark Mode Colors */
+[data-theme="dark"] {
+  /* iOS Dark Mode Colors */
+  --ios-blue: #0A84FF;
+  --ios-green: #30D158;
+  --ios-red: #FF453A;
+  --ios-orange: #FF9F0A;
+  --ios-yellow: #FFD60A;
+  --ios-purple: #BF5AF2;
+  --ios-pink: #FF375F;
+  --ios-indigo: #5E5CE6;
+  --ios-teal: #64D2FF;
+  
+  /* Dark Mode Labels */
+  --ios-label: #FFFFFF;
+  --ios-secondary-label: rgba(235, 235, 245, 0.6);
+  --ios-tertiary-label: rgba(235, 235, 245, 0.3);
+  --ios-quaternary-label: rgba(235, 235, 245, 0.18);
+  
+  /* Dark Mode Backgrounds */
+  --ios-system-background: #000000;
+  --ios-secondary-system-background: #1C1C1E;
+  --ios-tertiary-system-background: #2C2C2E;
+  --ios-system-grouped-background: #000000;
+  --ios-secondary-system-grouped-background: #1C1C1E;
+  --ios-tertiary-system-grouped-background: #2C2C2E;
+  
+  /* Dark Mode Fills */
+  --ios-system-fill: rgba(120, 120, 128, 0.36);
+  --ios-secondary-system-fill: rgba(120, 120, 128, 0.32);
+  --ios-tertiary-system-fill: rgba(118, 118, 128, 0.24);
+  --ios-quaternary-system-fill: rgba(116, 116, 128, 0.18);
+  
+  /* Dark Mode Grays */
+  --ios-gray: #8E8E93;
+  --ios-gray-2: #636366;
+  --ios-gray-3: #48484A;
+  --ios-gray-4: #3A3A3C;
+  --ios-gray-5: #2C2C2E;
+  --ios-gray-6: #1C1C1E;
+}
+
+/* Theme Selector Styles */
+.theme-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.theme-btn {
+  background: var(--ios-tertiary-system-fill);
+  border: 1px solid var(--ios-quaternary-system-fill);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ios-secondary-label);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+  background: var(--ios-secondary-system-fill);
+  transform: translateY(-1px);
+}
+
+.theme-btn.active {
+  background: var(--ios-blue);
+  color: white;
+  border-color: var(--ios-blue);
+}
+
+.theme-btn:active {
+  transform: translateY(0);
+}
+
+/* Exercise Card Improvements */
+.exercise-card {
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.exercise-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ios-label);
+  margin: 0;
+}
+
+.exercise-category {
+  background: var(--ios-blue);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.exercise-details {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--ios-secondary-label);
+}
+
+.exercise-instructions ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.exercise-instructions li {
+  margin-bottom: 4px;
+  color: var(--ios-secondary-label);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.exercise-actions {
+  margin-top: 12px;
+}
+
+/* Exercise Category Icons */
+.exercise-category::before {
+  content: '';
+  margin-right: 4px;
+}
+
+.exercise-card[data-category="chest"] .exercise-category::before { content: '💪'; }
+.exercise-card[data-category="back"] .exercise-category::before { content: '🏋️'; }
+.exercise-card[data-category="legs"] .exercise-category::before { content: '🦵'; }
+.exercise-card[data-category="shoulders"] .exercise-category::before { content: '🤸'; }
+.exercise-card[data-category="arms"] .exercise-category::before { content: '💪'; }
+.exercise-card[data-category="cardio"] .exercise-category::before { content: '🏃'; }
+.exercise-card[data-category="core"] .exercise-category::before { content: '🎯'; }
   
   /* Spacing */
   --spacing-xs: 4px;

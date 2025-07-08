@@ -205,6 +205,17 @@
                 </div>
 
                 <div class="profile-menu ios-list">
+                    <div class="ios-list-item" id="theme-selector">
+                        <div class="ios-list-icon">🎨</div>
+                        <div class="ios-list-content">
+                            <div class="ios-list-title">Theme</div>
+                            <div class="theme-buttons">
+                                <button class="theme-btn active" data-theme="light">☀️ Light</button>
+                                <button class="theme-btn" data-theme="dark">🌙 Dark</button>
+                                <button class="theme-btn" data-theme="auto">🔄 Auto</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="ios-list-item" id="data-management-btn">
                         <div class="ios-list-icon">💾</div>
                         <div class="ios-list-content">
@@ -672,14 +683,15 @@
         function createExerciseElement(exercise) {
             const div = document.createElement('div');
             div.className = 'exercise-card ios-card';
+            div.setAttribute('data-category', exercise.category);
             div.innerHTML = `
                 <div class="exercise-header">
                     <h3 class="exercise-name">${exercise.name}</h3>
                     <span class="exercise-category">${exercise.category}</span>
                 </div>
                 <div class="exercise-details">
-                    <span class="exercise-equipment">Equipment: ${exercise.equipment || 'bodyweight'}</span>
-                    <span class="exercise-difficulty">Difficulty: ${exercise.difficulty || 'beginner'}</span>
+                    <span class="exercise-equipment">⚡ ${exercise.equipment || 'bodyweight'}</span>
+                    <span class="exercise-difficulty">📊 ${exercise.difficulty || 'beginner'}</span>
                 </div>
                 <div class="exercise-instructions">
                     <p><strong>Instructions:</strong></p>
@@ -688,7 +700,7 @@
                     </ul>
                 </div>
                 <div class="exercise-actions">
-                    <button class="btn ios-button-secondary" onclick="addToWorkout('${exercise.id}')">Add to Workout</button>
+                    <button class="btn ios-button-secondary" onclick="addToWorkout('${exercise.id}')">➕ Add to Workout</button>
                 </div>
             `;
             return div;
@@ -757,10 +769,62 @@
             });
         }
         
+        // Theme Management
+        function initializeTheme() {
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('workout-tracker-theme') || 'light';
+            setTheme(savedTheme);
+            
+            // Set up theme button listeners
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const theme = this.dataset.theme;
+                    setTheme(theme);
+                    
+                    // Update active button
+                    themeButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Save preference
+                    localStorage.setItem('workout-tracker-theme', theme);
+                });
+            });
+        }
+        
+        function setTheme(theme) {
+            const body = document.body;
+            
+            if (theme === 'auto') {
+                // Use system preference
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+            
+            // Update theme-color meta tag
+            const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+            if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                themeColorMeta.content = '#000000';
+            } else {
+                themeColorMeta.content = '#007AFF';
+            }
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            const currentTheme = localStorage.getItem('workout-tracker-theme');
+            if (currentTheme === 'auto') {
+                setTheme('auto');
+            }
+        });
+
         // Initialize search and filters after a delay
         setTimeout(() => {
             setupExerciseSearch();
             setupCategoryFilters();
+            initializeTheme();
         }, 3000);
     </script>
 </body>

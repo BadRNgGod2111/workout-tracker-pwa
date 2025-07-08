@@ -1,41 +1,8 @@
-
-<?xml version="1.0" encoding="UTF-8"?>
 <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0051D0;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="dumbbellGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#E8E8E8;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Background -->
-  <rect width="192" height="192" rx="32" fill="url(#backgroundGradient)"/>
-  
-  <!-- Dumbbell Icon -->
-  <g transform="translate(96,96)">
-    <!-- Left Weight -->
-    <rect x="-60" y="-24" width="24" height="48" rx="6" fill="url(#dumbbellGradient)"/>
-    <rect x="-64" y="-18" width="32" height="36" rx="8" fill="url(#dumbbellGradient)"/>
-    
-    <!-- Handle -->
-    <rect x="-32" y="-6" width="64" height="12" rx="6" fill="url(#dumbbellGradient)"/>
-    
-    <!-- Right Weight -->
-    <rect x="36" y="-24" width="24" height="48" rx="6" fill="url(#dumbbellGradient)"/>
-    <rect x="32" y="-18" width="32" height="36" rx="8" fill="url(#dumbbellGradient)"/>
-    
-    <!-- Handle Grip Lines -->
-    <rect x="-20" y="-2" width="2" height="4" rx="1" fill="#D0D0D0"/>
-    <rect x="-10" y="-2" width="2" height="4" rx="1" fill="#D0D0D0"/>
-    <rect x="0" y="-2" width="2" height="4" rx="1" fill="#D0D0D0"/>
-    <rect x="10" y="-2" width="2" height="4" rx="1" fill="#D0D0D0"/>
-    <rect x="20" y="-2" width="2" height="4" rx="1" fill="#D0D0D0"/>
-  </g>
-  
-  <!-- Subtle shadow for depth -->
-  <ellipse cx="96" cy="160" rx="40" ry="8" fill="rgba(0,0,0,0.1)"/>
+  <rect width="192" height="192" rx="42" fill="#007AFF"/>
+  <path d="M48 96h24v-16h48v16h24v-32h-24v-16h-48v16h-24v32z" fill="white"/>
+  <circle cx="48" cy="96" r="12" fill="white"/>
+  <circle cx="144" cy="96" r="12" fill="white"/>
+  <path d="M72 64h48v64h-48z" fill="white" opacity="0.8"/>
 </svg>
+EOF < /dev/null

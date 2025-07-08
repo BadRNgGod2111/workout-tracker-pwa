@@ -1,13 +1,8 @@
-
-    <svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
-      <rect width="96" height="96" fill="#5AC8FA" rx="9.600000000000001"/>
-      <g transform="translate(48,48)" fill="white">
-        
-        <rect x="-1.875" y="0.75" width="0.5625" height="1.125"/>
-        <rect x="-0.9375" y="0.375" width="0.5625" height="1.5"/>
-        <rect x="0" y="-0.375" width="0.5625" height="2.25"/>
-        <rect x="0.9375" y="-0.75" width="0.5625" height="2.625"/>
-      
-      </g>
-    </svg>
-  
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" rx="42" fill="#007AFF"/>
+  <path d="M48 96h24v-16h48v16h24v-32h-24v-16h-48v16h-24v32z" fill="white"/>
+  <circle cx="48" cy="96" r="12" fill="white"/>
+  <circle cx="144" cy="96" r="12" fill="white"/>
+  <path d="M72 64h48v64h-48z" fill="white" opacity="0.8"/>
+</svg>
+EOF < /dev/null
