@@ -3,7 +3,7 @@
  * Provides offline functionality, caching strategies, and background sync
  */
 
-const CACHE_NAME = 'workout-tracker-v1';
+const CACHE_NAME = 'workout-tracker-v2';
 const DATA_CACHE_NAME = 'workout-tracker-data-v1';
 const SYNC_CACHE_NAME = 'workout-tracker-sync-v1';
 
@@ -13,6 +13,7 @@ const APP_SHELL_FILES = [
   '/index.html',
   '/css/app.css',
   '/css/ios-theme.css',
+  '/css/user-profile.css',
   '/js/app.js',
   '/js/database.js',
   '/js/exercises.js',
@@ -25,6 +26,8 @@ const APP_SHELL_FILES = [
   '/js/timer-ui.js',
   '/js/notifications.js',
   '/js/data-manager.js',
+  '/js/user-profile.js',
+  '/js/profile-ui.js',
   '/manifest.json',
   '/icons/icon-192.svg',
   '/icons/icon-512.svg',

@@ -38,6 +38,10 @@ class WorkoutTrackerApp {
             plans: PlanManager,
             progress: ProgressDashboard
         };
+        
+        // User profile system
+        this.userProfile = null;
+        this.profileUI = null;
 
         this.init();
     }
@@ -166,6 +170,12 @@ class WorkoutTrackerApp {
             this.dataManager = new DataManager(Database);
             await this.setupDataManagement();
             console.log('✅ Data management system initialized');
+
+            // Initialize user profile system
+            this.userProfile = new UserProfile(Database);
+            this.profileUI = new ProfileUI(this.userProfile, this);
+            window.profileUI = this.profileUI; // Make available globally for onclick handlers
+            console.log('✅ User profile system initialized');
 
         } catch (error) {
             console.error('Error initializing modules:', error);

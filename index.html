@@ -88,6 +88,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/ios-theme.css">
+    <link rel="stylesheet" href="css/user-profile.css">
 </head>
 <body>
     <div class="app-container">
@@ -172,12 +173,13 @@
 
             <!-- Profile Tab -->
             <div class="tab-content" id="profile-tab">
-                <div class="profile-header ios-card">
-                    <div class="profile-avatar">
-                        <div class="avatar-placeholder">👤</div>
+                <div class="profile-header">
+                    <div class="profile-avatar-section">
+                        <div class="avatar-placeholder avatar avatar-large">👤</div>
                     </div>
-                    <h2>Your Profile</h2>
-                    <p class="profile-subtitle">Track your fitness journey</p>
+                    <div class="profile-name">Set Your Name</div>
+                    <div class="profile-subtitle">Customize your profile</div>
+                    <div class="profile-bio" style="display: none;"></div>
                 </div>
                 
                 <div class="stats-section">
@@ -512,6 +514,8 @@
     <script src="js/timer-ui.js"></script>
     <script src="js/notifications.js"></script>
     <script src="js/data-manager.js"></script>
+    <script src="js/user-profile.js"></script>
+    <script src="js/profile-ui.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
