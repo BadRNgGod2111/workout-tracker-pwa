@@ -537,8 +537,8 @@
             
             // Wait a bit for the main app to load
             setTimeout(function() {
-                // Check if main app initialized
-                if (!window.app) {
+                // Check if main app initialized properly
+                if (!window.app || window.app.fallbackMode || !window.app.appState || window.app.appState.isInitialized === false) {
                     console.warn('⚠️ Main app not initialized, setting up fallback handlers');
                     
                     // Basic Start Workout button
@@ -624,7 +624,7 @@
                 } else {
                     console.log('✅ Main app initialized, fallback not needed');
                 }
-            }, 2000);
+            }, 500);
         });
         
         // Helper functions for fallback functionality
