@@ -45,13 +45,13 @@ class WorkoutTrackerApp {
         // Event listeners
         this.eventListeners = new Map();
         
-        // Module references
+        // Module references - initialize safely
         this.modules = {
-            database: Database,
-            exercises: ExerciseManager,
-            workouts: WorkoutManager,
-            plans: PlanManager,
-            progress: ProgressDashboard
+            database: typeof Database !== 'undefined' ? Database : null,
+            exercises: typeof ExerciseManager !== 'undefined' ? ExerciseManager : null,
+            workouts: typeof WorkoutManager !== 'undefined' ? WorkoutManager : null,
+            plans: typeof PlanManager !== 'undefined' ? PlanManager : null,
+            progress: typeof ProgressDashboard !== 'undefined' ? ProgressDashboard : null
         };
         
         // User profile system
@@ -138,59 +138,136 @@ class WorkoutTrackerApp {
      */
     async initializeModules() {
         try {
-            // Listen to WorkoutManager events
-            WorkoutManager.addEventListener('workoutStarted', (data) => {
-                this.handleWorkoutStarted(data);
-            });
+            console.log('🔧 Initializing modules...');
             
-            WorkoutManager.addEventListener('workoutCompleted', (data) => {
-                this.handleWorkoutCompleted(data);
-            });
-            
-            WorkoutManager.addEventListener('restTimerCompleted', (data) => {
-                this.handleRestTimerCompleted(data);
-            });
-            
-            WorkoutManager.addEventListener('workoutDurationUpdate', (data) => {
-                this.updateWorkoutTimer(data);
-            });
-
-            // Listen to PlanManager events
-            PlanManager.addEventListener('planCreated', (data) => {
-                this.handlePlanCreated(data);
-            });
-            
-            PlanManager.addEventListener('planWorkoutStarted', (data) => {
-                this.handlePlanWorkoutStarted(data);
-            });
-
-            // Create pre-built templates if they don't exist
-            const existingPlans = await PlanManager.getAllPlans();
-            if (existingPlans.length === 0) {
-                await PlanManager.createPrebuiltTemplates();
-                console.log('✅ Pre-built plan templates created');
+            // Safely initialize WorkoutManager events
+            if (typeof WorkoutManager !== 'undefined' && WorkoutManager.addEventListener) {
+                WorkoutManager.addEventListener('workoutStarted', (data) => {
+                    this.handleWorkoutStarted(data);
+                });
+                
+                WorkoutManager.addEventListener('workoutCompleted', (data) => {
+                    this.handleWorkoutCompleted(data);
+                });
+                
+                WorkoutManager.addEventListener('restTimerCompleted', (data) => {
+                    this.handleRestTimerCompleted(data);
+                });
+                
+                WorkoutManager.addEventListener('workoutDurationUpdate', (data) => {
+                    this.updateWorkoutTimer(data);
+                });
+                console.log('✅ WorkoutManager events initialized');
+            } else {
+                console.warn('⚠️ WorkoutManager not available');
             }
 
-            // Initialize progress dashboard
-            this.progressDashboard = new ProgressDashboard(this);
-            console.log('✅ Progress dashboard initialized');
+            // Safely initialize PlanManager events
+            if (typeof PlanManager !== 'undefined' && PlanManager.addEventListener) {
+                PlanManager.addEventListener('planCreated', (data) => {
+                    this.handlePlanCreated(data);
+                });
+                
+                PlanManager.addEventListener('planWorkoutStarted', (data) => {
+                    this.handlePlanWorkoutStarted(data);
+                });
+                console.log('✅ PlanManager events initialized');
+            } else {
+                console.warn('⚠️ PlanManager not available');
+            }
 
-            // Initialize timer system
-            this.timers = new WorkoutTimers();
-            this.timerUI = new TimerUI(this.timers);
-            await this.setupTimerIntegration();
-            console.log('✅ Timer system initialized');
+            // Create pre-built templates if they don't exist (safely)
+            let existingPlans = [];
+            try {
+                if (typeof PlanManager !== 'undefined' && PlanManager.getAllPlans) {
+                    existingPlans = await PlanManager.getAllPlans();
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not load existing plans:', error);
+            }
+            if (existingPlans.length === 0) {
+                try {
+                    if (typeof PlanManager !== 'undefined' && PlanManager.createPrebuiltTemplates) {
+                        await PlanManager.createPrebuiltTemplates();
+                        console.log('✅ Pre-built plan templates created');
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Could not create pre-built templates:', error);
+                }
+            }
 
-            // Initialize data manager
-            this.dataManager = new DataManager(Database);
-            await this.setupDataManagement();
-            console.log('✅ Data management system initialized');
+            // Initialize progress dashboard (safely)
+            try {
+                if (typeof ProgressDashboard !== 'undefined') {
+                    this.progressDashboard = new ProgressDashboard(this);
+                    console.log('✅ Progress dashboard initialized');
+                } else {
+                    console.warn('⚠️ ProgressDashboard not available');
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not initialize ProgressDashboard:', error);
+            }
 
-            // Initialize user profile system
-            this.userProfile = new UserProfile(Database);
-            this.profileUI = new ProfileUI(this.userProfile, this);
-            window.profileUI = this.profileUI; // Make available globally for onclick handlers
-            console.log('✅ User profile system initialized');
+            // Initialize timer system (safely)
+            try {
+                if (typeof WorkoutTimers !== 'undefined') {
+                    this.timers = new WorkoutTimers();
+                    console.log('✅ WorkoutTimers initialized');
+                } else {
+                    console.warn('⚠️ WorkoutTimers not available');
+                }
+                
+                if (typeof TimerUI !== 'undefined' && this.timers) {
+                    this.timerUI = new TimerUI(this.timers);
+                    console.log('✅ TimerUI initialized');
+                } else {
+                    console.warn('⚠️ TimerUI not available');
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not initialize timer system:', error);
+            }
+            // Setup timer integration (safely)
+            try {
+                if (this.timers && this.timerUI) {
+                    await this.setupTimerIntegration();
+                    console.log('✅ Timer integration setup complete');
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not setup timer integration:', error);
+            }
+
+            // Initialize data manager (safely)
+            try {
+                if (typeof DataManager !== 'undefined' && typeof Database !== 'undefined') {
+                    this.dataManager = new DataManager(Database);
+                    await this.setupDataManagement();
+                    console.log('✅ Data management system initialized');
+                } else {
+                    console.warn('⚠️ DataManager or Database not available');
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not initialize data manager:', error);
+            }
+
+            // Initialize user profile system (safely)
+            try {
+                if (typeof UserProfile !== 'undefined' && typeof Database !== 'undefined') {
+                    this.userProfile = new UserProfile(Database);
+                    console.log('✅ UserProfile initialized');
+                    
+                    if (typeof ProfileUI !== 'undefined') {
+                        this.profileUI = new ProfileUI(this.userProfile, this);
+                        window.profileUI = this.profileUI; // Make available globally for onclick handlers
+                        console.log('✅ ProfileUI initialized');
+                    } else {
+                        console.warn('⚠️ ProfileUI not available');
+                    }
+                } else {
+                    console.warn('⚠️ UserProfile or Database not available');
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not initialize user profile system:', error);
+            }
 
         } catch (error) {
             console.error('Error initializing modules:', error);
