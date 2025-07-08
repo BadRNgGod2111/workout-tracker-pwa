@@ -41,9 +41,9 @@
   --ios-quaternary-system-fill: rgba(116, 116, 128, 0.08);
 }
 
-/* Dark Mode Colors */
+/* Dark Mode Colors - Sleek Dark Theme */
 [data-theme="dark"] {
-  /* iOS Dark Mode Colors */
+  /* Accent Colors - More muted for dark theme */
   --ios-blue: #0A84FF;
   --ios-green: #30D158;
   --ios-red: #FF453A;
@@ -54,33 +54,33 @@
   --ios-indigo: #5E5CE6;
   --ios-teal: #64D2FF;
   
-  /* Dark Mode Labels */
+  /* Dark Mode Labels - Higher contrast */
   --ios-label: #FFFFFF;
-  --ios-secondary-label: rgba(235, 235, 245, 0.6);
-  --ios-tertiary-label: rgba(235, 235, 245, 0.3);
-  --ios-quaternary-label: rgba(235, 235, 245, 0.18);
+  --ios-secondary-label: rgba(255, 255, 255, 0.8);
+  --ios-tertiary-label: rgba(255, 255, 255, 0.6);
+  --ios-quaternary-label: rgba(255, 255, 255, 0.4);
   
-  /* Dark Mode Backgrounds */
+  /* Dark Mode Backgrounds - Much darker */
   --ios-system-background: #000000;
-  --ios-secondary-system-background: #1C1C1E;
-  --ios-tertiary-system-background: #2C2C2E;
+  --ios-secondary-system-background: #0A0A0A;
+  --ios-tertiary-system-background: #141414;
   --ios-system-grouped-background: #000000;
-  --ios-secondary-system-grouped-background: #1C1C1E;
-  --ios-tertiary-system-grouped-background: #2C2C2E;
+  --ios-secondary-system-grouped-background: #0A0A0A;
+  --ios-tertiary-system-grouped-background: #141414;
   
-  /* Dark Mode Fills */
-  --ios-system-fill: rgba(120, 120, 128, 0.36);
-  --ios-secondary-system-fill: rgba(120, 120, 128, 0.32);
-  --ios-tertiary-system-fill: rgba(118, 118, 128, 0.24);
-  --ios-quaternary-system-fill: rgba(116, 116, 128, 0.18);
+  /* Dark Mode Fills - Darker variations */
+  --ios-system-fill: rgba(255, 255, 255, 0.08);
+  --ios-secondary-system-fill: rgba(255, 255, 255, 0.06);
+  --ios-tertiary-system-fill: rgba(255, 255, 255, 0.04);
+  --ios-quaternary-system-fill: rgba(255, 255, 255, 0.02);
   
-  /* Dark Mode Grays */
+  /* Dark Mode Grays - Darker spectrum */
   --ios-gray: #8E8E93;
-  --ios-gray-2: #636366;
-  --ios-gray-3: #48484A;
-  --ios-gray-4: #3A3A3C;
-  --ios-gray-5: #2C2C2E;
-  --ios-gray-6: #1C1C1E;
+  --ios-gray-2: #5A5A5A;
+  --ios-gray-3: #3A3A3A;
+  --ios-gray-4: #2A2A2A;
+  --ios-gray-5: #1A1A1A;
+  --ios-gray-6: #0A0A0A;
 }
 
 /* Theme Selector Styles */
@@ -122,6 +122,31 @@
   margin-bottom: 16px;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.exercise-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.exercise-card:hover .exercise-image img {
+  transform: scale(1.05);
+}
+
+.exercise-content {
+  padding: var(--spacing-md);
+  flex: 1;
 }
 
 .exercise-header {
@@ -182,6 +207,145 @@
 .exercise-card[data-category="back"] .exercise-category::before { content: '🏋️'; }
 .exercise-card[data-category="legs"] .exercise-category::before { content: '🦵'; }
 .exercise-card[data-category="shoulders"] .exercise-category::before { content: '🤸'; }
+
+/* Workout Session Styles */
+.workout-exercise {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.workout-exercise h4 {
+  margin: 0 0 var(--spacing-xs) 0;
+  color: var(--ios-label);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.workout-exercise p {
+  margin: var(--spacing-xs) 0;
+  color: var(--ios-secondary-label);
+  font-size: 0.9rem;
+}
+
+.workout-exercises {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: var(--spacing-md) 0;
+}
+
+.workout-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+/* Plan Card Styles */
+.plan-card {
+  margin-bottom: var(--spacing-md);
+}
+
+.plan-card h3 {
+  margin: 0 0 var(--spacing-xs) 0;
+  color: var(--ios-label);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.plan-meta {
+  display: flex;
+  gap: var(--spacing-md);
+  margin: var(--spacing-sm) 0;
+  font-size: 0.9rem;
+  color: var(--ios-secondary-label);
+}
+
+.plan-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.no-data {
+  text-align: center;
+  color: var(--ios-secondary-label);
+  font-style: italic;
+  padding: var(--spacing-lg);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--ios-label);
+  font-weight: 500;
+}
+
+.button-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+/* Exercise Actions */
+.exercise-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+/* Plan Selection Interface */
+.plan-selection {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: var(--spacing-md) 0;
+}
+
+.plan-option {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.plan-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+.plan-option h4 {
+  margin: 0 0 var(--spacing-xs) 0;
+  color: var(--ios-label);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.plan-option p {
+  margin: var(--spacing-xs) 0;
+  color: var(--ios-secondary-label);
+  font-size: 0.9rem;
+}
+
+.plan-exercise-count {
+  display: inline-block;
+  background: var(--ios-blue);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
 .exercise-card[data-category="arms"] .exercise-category::before { content: '💪'; }
 .exercise-card[data-category="cardio"] .exercise-category::before { content: '🏃'; }
 .exercise-card[data-category="core"] .exercise-category::before { content: '🎯'; }
@@ -222,9 +386,10 @@
   --safe-area-inset-left: env(safe-area-inset-left);
   
   /* Transitions */
-  --transition-fast: 0.15s ease-out;
-  --transition-normal: 0.25s ease-out;
-  --transition-slow: 0.35s ease-out;
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   
   /* Z-Index */
   --z-dropdown: 1000;
@@ -289,6 +454,43 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Default to dark theme for sleek look */
+body:not([data-theme]) {
+  --ios-blue: #0A84FF;
+  --ios-green: #30D158;
+  --ios-red: #FF453A;
+  --ios-orange: #FF9F0A;
+  --ios-yellow: #FFD60A;
+  --ios-purple: #BF5AF2;
+  --ios-pink: #FF375F;
+  --ios-indigo: #5E5CE6;
+  --ios-teal: #64D2FF;
+  
+  --ios-label: #FFFFFF;
+  --ios-secondary-label: rgba(255, 255, 255, 0.8);
+  --ios-tertiary-label: rgba(255, 255, 255, 0.6);
+  --ios-quaternary-label: rgba(255, 255, 255, 0.4);
+  
+  --ios-system-background: #000000;
+  --ios-secondary-system-background: #0A0A0A;
+  --ios-tertiary-system-background: #141414;
+  --ios-system-grouped-background: #000000;
+  --ios-secondary-system-grouped-background: #0A0A0A;
+  --ios-tertiary-system-grouped-background: #141414;
+  
+  --ios-system-fill: rgba(255, 255, 255, 0.08);
+  --ios-secondary-system-fill: rgba(255, 255, 255, 0.06);
+  --ios-tertiary-system-fill: rgba(255, 255, 255, 0.04);
+  --ios-quaternary-system-fill: rgba(255, 255, 255, 0.02);
+  
+  --ios-gray: #8E8E93;
+  --ios-gray-2: #5A5A5A;
+  --ios-gray-3: #3A3A3A;
+  --ios-gray-4: #2A2A2A;
+  --ios-gray-5: #1A1A1A;
+  --ios-gray-6: #0A0A0A;
+}
+
 /* App Container */
 .app-container {
   display: flex;
@@ -304,13 +506,14 @@ body {
 
 /* Header */
 .app-header {
-  background: linear-gradient(135deg, var(--ios-blue) 0%, var(--ios-indigo) 100%);
+  background: linear-gradient(135deg, #0A0A0A 0%, #141414 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: white;
   padding: var(--spacing-md);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
@@ -378,15 +581,15 @@ body {
 /* Tab Bar */
 .tab-bar {
   display: flex;
-  background-color: var(--ios-secondary-system-grouped-background);
-  border-top: 0.5px solid var(--ios-gray-4);
+  background-color: #0A0A0A;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   position: sticky;
   bottom: 0;
   z-index: var(--z-sticky);
   padding: var(--spacing-xs) 0 calc(var(--spacing-xs) + var(--safe-area-inset-bottom));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 -1px 0 var(--ios-gray-5);
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.8);
 }
 
 .tab-button {
@@ -459,29 +662,31 @@ body {
   }
 }
 
-/* Cards */
+/* Cards - Sleek Dark Design */
 .card,
 .ios-card {
-  background-color: var(--ios-secondary-system-grouped-background);
+  background-color: #141414;
   border-radius: var(--radius-md);
   padding: var(--spacing-md);
   margin-bottom: var(--spacing-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
   transition: all var(--transition-fast);
-  border: 0.5px solid var(--ios-gray-5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .card:hover,
 .ios-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.16);
+  transition: all var(--transition-normal);
 }
 
 .quick-start-card {
   text-align: center;
-  background: linear-gradient(135deg, var(--ios-blue) 0%, var(--ios-indigo) 100%);
+  background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
   color: white;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .quick-start-card h2 {
@@ -529,24 +734,27 @@ body {
 }
 
 .ios-button {
-  background: var(--ios-blue);
+  background: linear-gradient(135deg, #0A84FF 0%, #0051D0 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(10, 132, 255, 0.3);
 }
 
 .ios-button:hover {
-  background: var(--ios-blue-dark);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, #0051D0 0%, #003DA3 100%);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(10, 132, 255, 0.5);
+  transition: all var(--transition-normal);
 }
 
 .ios-button-secondary {
-  background-color: var(--ios-secondary-system-fill);
-  color: var(--ios-blue);
-  border: 1px solid var(--ios-gray-4);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #0A84FF;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .ios-button-secondary:hover {
-  background-color: var(--ios-tertiary-system-fill);
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
 .ios-button-destructive {
@@ -556,16 +764,16 @@ body {
 
 /* Lists */
 .ios-list {
-  background-color: var(--ios-secondary-system-grouped-background);
+  background-color: #141414;
   border-radius: var(--radius-md);
   overflow: hidden;
   margin-bottom: var(--spacing-md);
-  border: 0.5px solid var(--ios-gray-5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ios-list-item {
   padding: var(--spacing-md);
-  border-bottom: 0.5px solid var(--ios-gray-5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   min-height: 44px;
@@ -631,10 +839,10 @@ body {
 .ios-input {
   width: 100%;
   padding: var(--spacing-md);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   font-size: 1rem;
-  background-color: var(--ios-tertiary-system-fill);
+  background-color: rgba(255, 255, 255, 0.04);
   color: var(--ios-label);
   transition: all var(--transition-fast);
 }
@@ -642,8 +850,9 @@ body {
 .search-input:focus,
 .ios-input:focus {
   outline: none;
-  background-color: var(--ios-secondary-system-fill);
-  box-shadow: 0 0 0 2px var(--ios-blue);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #0A84FF;
+  box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.2);
 }
 
 .search-input::placeholder,
@@ -751,11 +960,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.8);
   display: none;
   z-index: var(--z-modal);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .modal.active {
@@ -766,12 +975,13 @@ body {
 }
 
 .modal-content {
-  background: var(--ios-secondary-system-grouped-background);
+  background: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-lg);
   max-width: 90%;
   max-height: 90%;
   overflow: auto;
-  box-shadow: var(--shadow-xl);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
   animation: modalSlideUp var(--transition-normal);
 }
 
@@ -791,7 +1001,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-lg);
-  border-bottom: 0.5px solid var(--ios-gray-5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .modal-close {
