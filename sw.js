@@ -3,44 +3,44 @@
  * Provides offline functionality, caching strategies, and background sync
  */
 
-const CACHE_NAME = 'workout-tracker-v3';
+const CACHE_NAME = 'workout-tracker-v4';
 const DATA_CACHE_NAME = 'workout-tracker-data-v1';
 const SYNC_CACHE_NAME = 'workout-tracker-sync-v1';
 
 // App Shell - Core files that rarely change
 const APP_SHELL_FILES = [
-  '/',
-  '/index.html',
-  '/css/app.css',
-  '/css/ios-theme.css',
-  '/css/user-profile.css',
-  '/js/app.js',
-  '/js/database.js',
-  '/js/exercises.js',
-  '/js/workouts.js',
-  '/js/plans.js',
-  '/js/statistics.js',
-  '/js/charts.js',
-  '/js/progress.js',
-  '/js/timers.js',
-  '/js/timer-ui.js',
-  '/js/notifications.js',
-  '/js/data-manager.js',
-  '/js/user-profile.js',
-  '/js/profile-ui.js',
-  '/data/exercises.json',
-  '/manifest.json',
-  '/favicon.svg',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg',
-  '/debug.html',
-  '/test-fixes.html',
-  '/offline.html'
+  '/workout-tracker-pwa/',
+  '/workout-tracker-pwa/index.html',
+  '/workout-tracker-pwa/css/app.css',
+  '/workout-tracker-pwa/css/ios-theme.css',
+  '/workout-tracker-pwa/css/user-profile.css',
+  '/workout-tracker-pwa/js/app.js',
+  '/workout-tracker-pwa/js/database.js',
+  '/workout-tracker-pwa/js/exercises.js',
+  '/workout-tracker-pwa/js/workouts.js',
+  '/workout-tracker-pwa/js/plans.js',
+  '/workout-tracker-pwa/js/statistics.js',
+  '/workout-tracker-pwa/js/charts.js',
+  '/workout-tracker-pwa/js/progress.js',
+  '/workout-tracker-pwa/js/timers.js',
+  '/workout-tracker-pwa/js/timer-ui.js',
+  '/workout-tracker-pwa/js/notifications.js',
+  '/workout-tracker-pwa/js/data-manager.js',
+  '/workout-tracker-pwa/js/user-profile.js',
+  '/workout-tracker-pwa/js/profile-ui.js',
+  '/workout-tracker-pwa/data/exercises.json',
+  '/workout-tracker-pwa/manifest.json',
+  '/workout-tracker-pwa/favicon.svg',
+  '/workout-tracker-pwa/icons/icon-192.svg',
+  '/workout-tracker-pwa/icons/icon-512.svg',
+  '/workout-tracker-pwa/debug.html',
+  '/workout-tracker-pwa/test-fixes.html',
+  '/workout-tracker-pwa/offline.html'
 ];
 
 // Static data files that should be cached
 const STATIC_DATA_FILES = [
-  '/data/exercises.json'
+  '/workout-tracker-pwa/data/exercises.json'
 ];
 
 // Install event - Cache app shell
@@ -101,7 +101,7 @@ self.addEventListener('fetch', event => {
   // Handle different types of requests with appropriate strategies
   if (request.method === 'GET') {
     // App Shell files - Cache First
-    if (APP_SHELL_FILES.includes(url.pathname) || url.pathname === '/') {
+    if (APP_SHELL_FILES.includes(url.pathname) || url.pathname === '/workout-tracker-pwa/' || url.pathname === '/workout-tracker-pwa') {
       event.respondWith(cacheFirst(request));
     }
     // Static data files - Cache First
@@ -109,15 +109,15 @@ self.addEventListener('fetch', event => {
       event.respondWith(cacheFirst(request));
     }
     // Images and icons - Cache First with fallback
-    else if (request.destination === 'image' || url.pathname.startsWith('/icons/')) {
+    else if (request.destination === 'image' || url.pathname.startsWith('/workout-tracker-pwa/icons/')) {
       event.respondWith(cacheFirstWithFallback(request));
     }
     // CSS and JS files - Stale While Revalidate
-    else if (url.pathname.startsWith('/css/') || url.pathname.startsWith('/js/')) {
+    else if (url.pathname.startsWith('/workout-tracker-pwa/css/') || url.pathname.startsWith('/workout-tracker-pwa/js/')) {
       event.respondWith(staleWhileRevalidate(request));
     }
     // Other files from our domain - Cache First
-    else if (url.origin === self.location.origin) {
+    else if (url.origin === self.location.origin && url.pathname.startsWith('/workout-tracker-pwa/')) {
       event.respondWith(cacheFirst(request));
     }
     // External resources - Network First
@@ -154,8 +154,8 @@ async function cacheFirst(request) {
     console.error('[SW] Cache first failed for:', request.url, error);
     
     // If it's the main page, serve the offline page
-    if (request.url.includes('index.html') || request.url.endsWith('/')) {
-      const offlineResponse = await caches.match('/offline.html');
+    if (request.url.includes('index.html') || request.url.endsWith('/') || request.url.includes('/workout-tracker-pwa')) {
+      const offlineResponse = await caches.match('/workout-tracker-pwa/offline.html');
       if (offlineResponse) {
         return offlineResponse;
       }

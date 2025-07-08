@@ -2,14 +2,14 @@
   "name": "Workout Tracker - Fitness & Exercise Logger",
   "short_name": "Workout Tracker",
   "description": "Professional workout tracking PWA with exercise library, custom plans, progress analytics, and iOS-style interface. Track sets, reps, weight, and rest times with smart notifications.",
-  "start_url": "/?utm_source=pwa",
+  "start_url": "/workout-tracker-pwa/?utm_source=pwa",
   "id": "com.workouttracker.pwa",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone"],
   "background_color": "#F2F2F7",
   "theme_color": "#007AFF",
   "orientation": "portrait-primary",
-  "scope": "/",
+  "scope": "/workout-tracker-pwa/",
   "lang": "en-US",
   "dir": "ltr",
   "icons": [
@@ -120,7 +120,7 @@
       "name": "Start Quick Workout",
       "short_name": "Quick Workout",
       "description": "Start a new workout session immediately",
-      "url": "/?action=quick-workout",
+      "url": "/workout-tracker-pwa/?action=quick-workout",
       "icons": [
         {
           "src": "icons/shortcut-workout.svg",
@@ -133,7 +133,7 @@
       "name": "Browse Exercises",
       "short_name": "Exercises",
       "description": "Browse the exercise library",
-      "url": "/#exercises",
+      "url": "/workout-tracker-pwa/#exercises",
       "icons": [
         {
           "src": "icons/shortcut-exercises.svg",
@@ -146,7 +146,7 @@
       "name": "View Plans",
       "short_name": "Plans",
       "description": "View and manage workout plans",
-      "url": "/#plans",
+      "url": "/workout-tracker-pwa/#plans",
       "icons": [
         {
           "src": "icons/shortcut-plans.svg",
@@ -159,7 +159,7 @@
       "name": "Progress Stats",
       "short_name": "Progress",
       "description": "View workout progress and statistics",
-      "url": "/#profile",
+      "url": "/workout-tracker-pwa/#profile",
       "icons": [
         {
           "src": "icons/shortcut-progress.svg",
